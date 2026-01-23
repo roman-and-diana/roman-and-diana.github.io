@@ -243,7 +243,17 @@
 <script>
     document.addEventListener('DOMContentLoaded', () => {
 
-        // --- 1. ТАБИ (ФІЛЬТРАЦІЯ) ---
+        // --- 0. ДОДАЄМО СТИЛІ ДЛЯ СТАБІЛЬНОСТІ ---
+        // Це вирішує проблему "одного кліку", роблячи іконки прозорими для кліків
+        const style = document.createElement('style');
+        style.innerHTML = `
+            .mute-btn svg, .play-icon { pointer-events: none; }
+            .mute-btn, .volume-slider { z-index: 10; relative; }
+        `;
+        document.head.appendChild(style);
+
+
+        // --- 1. ТАБИ ---
         const tabBtns = document.querySelectorAll('.tab-btn');
         const portfolioItems = document.querySelectorAll('.portfolio-item');
 
@@ -266,7 +276,7 @@
         // --- 2. ВІДЕО ПЛЕЄР ---
         const allMockups = document.querySelectorAll('.phone-mockup');
 
-        // SVG Іконки
+        // Іконки
         const iconSoundOn = `<svg viewBox="0 0 24 24"><path d="M14,3.23V5.29C16.89,6.15 19,8.83 19,12C19,15.17 16.89,17.84 14,18.7V20.77C18,19.86 21,16.28 21,12C21,7.72 18,4.14 14,3.23M16.5,12C16.5,10.23 15.5,8.71 14,7.97V16C15.5,15.29 16.5,13.76 16.5,12M3,9V15H7L12,20V4L7,9H3Z" /></svg>`;
         const iconSoundOff = `<svg viewBox="0 0 24 24"><path d="M12,4L9.91,6.09L12,8.18M4.27,3L3,4.27L7.73,9H3V15H7L12,20V13.27L16.25,17.53C15.58,18.04 14.83,18.46 14,18.7V20.77C15.38,20.45 16.63,19.82 17.68,18.96L19.73,21L21,19.73L12,10.73M19,12C19,12.94 18.8,13.82 18.46,14.64L19.97,16.15C20.62,14.91 21,13.5 21,12C21,7.72 18,4.14 14,3.23V5.29C16.89,6.15 19,8.83 19,12M16.5,12C16.5,10.23 15.5,8.71 14,7.97V10.18L16.45,12.63C16.5,12.43 16.5,12.21 16.5,12Z" /></svg>`;
 
@@ -294,7 +304,11 @@
             const volumeSlider = mockup.querySelector('.volume-slider');
             const seekBar = mockup.querySelector('.seek-bar');
 
-            // --- Функція оновлення UI ---
+            // Прапорці станів
+            let isManuallyMuted = true;
+            let isHoveringControls = false; // Чи мишка зараз над кнопками?
+
+            // --- UI UPDATE ---
             function updateUI() {
                 // Play/Pause
                 if (video.paused) {
@@ -309,34 +323,53 @@
                     mockup.classList.add('is-playing');
                 }
 
-                // Звук
-                if (video.muted || video.volume === 0) {
+                // Sound
+                if (video.muted || video.volume < 0.05) {
                     muteBtn.innerHTML = iconSoundOff;
-                    if(volumeSlider) volumeSlider.value = 0;
                 } else {
                     muteBtn.innerHTML = iconSoundOn;
-                    if(volumeSlider && volumeSlider.value == 0) volumeSlider.value = 1;
                 }
             }
 
-            // Початковий стан
+            // Старт
             video.muted = true;
             video.volume = 0;
             muteBtn.innerHTML = iconSoundOff;
+            if(volumeSlider) volumeSlider.value = 0;
 
             video.play().then(() => updateUI()).catch(e => {
-                console.log("Autoplay blocked");
                 updateUI();
             });
 
-            // --- ОБРОБНИКИ ПОДІЙ ---
 
-            // ДЕСКТОП: Наведення
+            // --- КОНТРОЛЬ МИШКИ НАД КНОПКАМИ ---
+            const controls = [muteBtn, volumeSlider, playBtnBlock];
+            controls.forEach(el => {
+                if(!el) return;
+                el.addEventListener('mouseenter', () => { isHoveringControls = true; });
+                el.addEventListener('mouseleave', () => { isHoveringControls = false; });
+            });
+
+
+            // --- ПОДІЇ ---
+
+            // 1. ДЕСКТОП: Наведення на телефон
             mockup.addEventListener('mouseenter', () => {
                 if (window.matchMedia("(min-width: 769px)").matches) {
+                    // Якщо мишка зайшла, але ми зразу цілимось в кнопку - не вмикаємо звук автоматом,
+                    // щоб не збити налаштування.
+                    if (isHoveringControls) return;
+
                     muteAllExcept(video);
-                    video.muted = false;
-                    video.volume = 1;
+
+                    // Вмикаємо звук тільки якщо користувач не вимикав його вручну
+                    if (isManuallyMuted === false || video.paused) {
+                        video.muted = false;
+                        video.volume = 1;
+                        if(volumeSlider) volumeSlider.value = 1;
+                        isManuallyMuted = false;
+                    }
+
                     if(video.paused) video.play().catch(e=>{});
                     updateUI();
                 }
@@ -345,34 +378,86 @@
             mockup.addEventListener('mouseleave', () => {
                 if (window.matchMedia("(min-width: 769px)").matches) {
                     video.muted = true;
+                    // Не скидаємо volume в 0 повністю, щоб зберегти стан для повернення,
+                    // але візуально показуємо Mute через updateUI
                     updateUI();
                 }
             });
 
-            // МОБІЛЬНИЙ: Клік по телефону (ігноруємо кнопки)
-            mockup.addEventListener('click', (e) => {
-                // Перевірка: чи клік був НЕ по кнопках керування
-                const isControlClick = e.target.closest('.mute-btn') ||
-                                       e.target.closest('.volume-slider') ||
-                                       e.target.closest('.bottom-controls') ||
-                                       e.target.closest('.center-play-btn');
+            // 2. Кнопка MUTE (СТАБІЛЬНА ВЕРСІЯ)
+            muteBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
 
-                if (!isControlClick) {
+                // Перевіряємо: Чи є зараз звук?
+                const hasSound = !video.muted && video.volume > 0.1;
+
+                if (!hasSound) {
+                    // --- УВІМКНУТИ ---
                     muteAllExcept(video);
                     video.muted = false;
                     video.volume = 1;
+                    if(volumeSlider) volumeSlider.value = 1;
+                    isManuallyMuted = false;
+                } else {
+                    // --- ВИМКНУТИ ---
+                    video.muted = true;
+                    video.volume = 0;
+                    if(volumeSlider) volumeSlider.value = 0;
+                    isManuallyMuted = true;
+                }
+                updateUI();
+            });
+
+            // 3. Слайдер
+            if(volumeSlider) {
+                ['mousedown', 'click', 'touchstart'].forEach(evt =>
+                    volumeSlider.addEventListener(evt, e => e.stopPropagation())
+                );
+
+                volumeSlider.addEventListener('input', (e) => {
+                    const val = parseFloat(e.target.value);
+                    video.volume = val;
+
+                    if(val > 0) {
+                        video.muted = false;
+                        muteAllExcept(video);
+                        isManuallyMuted = false;
+                    } else {
+                        video.muted = true;
+                        isManuallyMuted = true;
+                    }
+                    updateUI();
+                });
+            }
+
+            // 4. Клік по телефону (ігноруємо кнопки)
+            mockup.addEventListener('click', (e) => {
+                if (muteBtn.contains(e.target) || (volumeSlider && volumeSlider.contains(e.target))) {
+                    return;
+                }
+
+                if (!e.target.closest('.bottom-controls') && !e.target.closest('.center-play-btn')) {
+                    muteAllExcept(video);
+                    video.muted = false;
+                    video.volume = 1;
+                    if(volumeSlider) volumeSlider.value = 1;
+                    isManuallyMuted = false;
+
                     if (video.paused) video.play();
                     updateUI();
                 }
             });
 
-            // Кнопка Play/Pause
+            // 5. Play Button
             playBtnBlock.addEventListener('click', (e) => {
                 e.stopPropagation();
                 if (video.paused) {
                     muteAllExcept(video);
                     video.muted = false;
                     video.volume = 1;
+                    if(volumeSlider) volumeSlider.value = 1;
+                    isManuallyMuted = false;
                     video.play();
                 } else {
                     video.pause();
@@ -380,45 +465,7 @@
                 updateUI();
             });
 
-            // Кнопка MUTE (Фінальна виправлена версія)
-            muteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-
-                // Якщо звук є (більше 0) — вимикаємо. Інакше вмикаємо.
-                if (video.volume > 0) {
-                    video.muted = true;
-                    video.volume = 0;
-                    if (volumeSlider) volumeSlider.value = 0;
-                    muteBtn.innerHTML = iconSoundOff;
-                } else {
-                    muteAllExcept(video);
-                    video.muted = false;
-                    video.volume = 1;
-                    if (volumeSlider) volumeSlider.value = 1;
-                    muteBtn.innerHTML = iconSoundOn;
-                }
-                // updateUI не обов'язковий, бо ми оновили вручну
-            });
-
-            // Слайдер гучності
-            if(volumeSlider) {
-                volumeSlider.addEventListener('input', (e) => {
-                    e.stopPropagation();
-                    video.volume = e.target.value;
-
-                    if(video.volume > 0) {
-                        video.muted = false;
-                        muteAllExcept(video);
-                    } else {
-                        video.muted = true;
-                    }
-
-                    if(video.volume === 0) muteBtn.innerHTML = iconSoundOff;
-                    else muteBtn.innerHTML = iconSoundOn;
-                });
-            }
-
-            // Seek Bar (Перемотка)
+            // 6. Seek Bar
             let isDragging = false;
             video.addEventListener('timeupdate', () => {
                 if (!isDragging) {
@@ -428,13 +475,13 @@
             });
             seekBar.addEventListener('input', () => {
                 isDragging = true;
-                video.pause(); // Пауза при перемотці
+                video.pause();
                 const time = (seekBar.value / 100) * video.duration;
                 video.currentTime = time;
             });
             seekBar.addEventListener('change', () => {
                 isDragging = false;
-                video.play(); // Старт після перемотки
+                video.play();
                 updateUI();
             });
 
@@ -449,21 +496,17 @@
 
             function startHideTimer() {
                 clearTimeout(hideControlsTimeout);
-                // Запускаємо таймер тільки якщо відео грає
                 if (!video.paused) {
                     hideControlsTimeout = setTimeout(() => {
                         mockup.classList.add('interface-hidden');
-                    }, 2500); // Час: 2.5 секунди
+                    }, 2500);
                 }
             }
 
-            // Логіка таймера:
-            video.addEventListener('play', startHideTimer); // Старт відео -> старт таймера
-            video.addEventListener('pause', showControls);  // Пауза -> показати кнопки
+            video.addEventListener('play', startHideTimer);
+            video.addEventListener('pause', showControls);
 
-            // Будь-яка активність -> показати кнопки і перезапустити таймер
-            const interactEvents = ['mousemove', 'touchstart', 'click', 'input'];
-            interactEvents.forEach(event => {
+            ['mousemove', 'touchstart', 'click', 'input'].forEach(event => {
                 mockup.addEventListener(event, () => {
                     showControls();
                     startHideTimer();
@@ -471,7 +514,7 @@
             });
         });
 
-        // --- 3. SCROLL TO MUTE (Вимкнення при скролі) ---
+        // --- 3. SCROLL TO MUTE ---
         let observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (!entry.isIntersecting) {
@@ -492,5 +535,6 @@
         allMockups.forEach(mockup => observer.observe(mockup));
     });
 </script>
+
 </body>
 </html>

@@ -1,0 +1,330 @@
+/* --- 1. ЗМІННІ ТА НАЛАШТУВАННЯ --- */
+:root {
+    --bg-color: #050505;
+    --text-color: #f4f4f4;
+    --accent-color: #7b2cbf;
+    --accent-glow: rgba(123, 44, 191, 0.4);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --phone-border: #1a1a1a;
+    --font-header: 'Unbounded', sans-serif;
+    --font-body: 'Manrope', sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
+a { text-decoration: none; color: inherit; transition: 0.3s; }
+button { font-family: inherit; cursor: pointer; border: none; outline: none; background: none;}
+ul { list-style: none; }
+
+/* --- 2. ЗАГАЛЬНІ КОМПОНЕНТИ --- */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.section { padding: 80px 0; }
+.section-title {
+    font-family: var(--font-header);
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* --- 3. HERO SECTION --- */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 80px;
+}
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 40px;
+}
+.hero-text { flex: 1; max-width: 600px; z-index: 2; }
+.hero-image-wrapper {
+    flex: 1; display: flex; justify-content: center; position: relative;
+}
+.hero-img {
+    max-width: 100%; max-height: 80vh; object-fit: contain;
+    filter: drop-shadow(0 0 30px rgba(123, 44, 191, 0.3));
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+.subtitle {
+    font-family: var(--font-header);
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    color: var(--accent-color);
+    text-transform: uppercase;
+}
+.glitch-text {
+    font-family: var(--font-header);
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 25px;
+}
+.hero-desc {
+    font-size: 1.1rem; margin-bottom: 40px; opacity: 0.8; max-width: 450px;
+}
+.btn-primary {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 1px solid var(--text-color);
+    border-radius: 50px;
+    font-family: var(--font-header);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    background: transparent;
+}
+.btn-primary:hover {
+    background: var(--text-color); color: var(--bg-color);
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* --- 4. FLOATING CTA --- */
+.floating-cta {
+    position: fixed; bottom: 30px; right: 30px;
+    background: var(--text-color); color: var(--bg-color);
+    padding: 12px 25px; border-radius: 50px;
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 700; z-index: 100;
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+.floating-cta:hover { transform: scale(1.05); }
+
+/* --- 5. MARQUEE (БРЕНДИ) --- */
+.marquee-section {
+    background: var(--glass-bg); padding: 25px 0;
+    overflow: hidden;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.marquee-content {
+    display: flex; gap: 60px; animation: scroll 25s linear infinite;
+}
+.marquee-content span {
+    font-family: var(--font-header);
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    text-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+@keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+/* --- 6. WHY ME --- */
+.features-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.feature-card {
+    background: #0f0f0f; padding: 40px 30px;
+    border-radius: 20px; border: 1px solid #222; transition: 0.3s;
+}
+.feature-card:hover { border-color: var(--accent-color); }
+.feature-number {
+    font-family: var(--font-header); font-size: 3rem; color: var(--accent-color); margin-bottom: 15px;
+}
+
+/* --- 7. ПОРТФОЛІО --- */
+.portfolio-tabs {
+    display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;
+}
+.tab-btn {
+    background: transparent;
+    color: rgba(255, 255, 255, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 25px; border-radius: 30px;
+    font-size: 0.9rem; transition: all 0.3s;
+}
+.tab-btn:hover, .tab-btn.active {
+    background: var(--text-color); color: var(--bg-color);
+    border-color: var(--text-color); font-weight: 700;
+}
+.video-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 50px; justify-items: center;
+}
+
+/* PHONE MOCKUP */
+.phone-mockup {
+    position: relative;
+    width: 280px; height: 500px;
+    border: 10px solid var(--phone-border);
+    border-radius: 35px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    z-index: 1;
+}
+.phone-mockup::before {
+    content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 100px; height: 25px;
+    background: var(--phone-border);
+    border-bottom-left-radius: 12px; border-bottom-right-radius: 12px;
+    z-index: 20;
+}
+.video-element {
+    width: 100%; height: 100%; object-fit: cover; display: block;
+}
+
+/* --- CUSTOM VIDEO CONTROLS (Оновлені) --- */
+.video-controls {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10;
+    display: flex; flex-direction: column; justify-content: space-between;
+    opacity: 0; transition: opacity 0.3s;
+    background: rgba(0,0,0,0.3); /* Трохи темніше */
+}
+.phone-mockup:hover .video-controls { opacity: 1; }
+
+/* Центральна кнопка */
+.center-play-btn {
+    position: absolute; top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px; height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: transform 0.2s, background 0.2s;
+}
+.center-play-btn:hover {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: rgba(255, 255, 255, 0.3);
+}
+.play-icon { font-size: 1.5rem; color: #fff; margin-left: 2px; }
+.center-play-btn.paused .play-icon { margin-left: 0; font-weight: 900; font-size: 1.2rem; }
+
+/* Нижня панель */
+.bottom-controls {
+    margin-top: auto; padding: 20px;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), transparent);
+}
+.control-row {
+    display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
+}
+
+/* --- НОВИЙ СЛАЙДЕР ГУЧНОСТІ --- */
+.volume-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.1);
+    padding: 6px 12px;
+    border-radius: 30px;
+    backdrop-filter: blur(4px);
+}
+
+/* SVG Іконка */
+.mute-btn svg {
+    width: 18px;
+    height: 18px;
+    fill: #fff;
+    display: block;
+}
+
+/* Горизонтальний слайдер */
+.volume-slider {
+    -webkit-appearance: none;
+    width: 80px; /* Фіксована ширина для горизонтальності */
+    height: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 2px;
+    outline: none;
+    cursor: pointer;
+}
+
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+}
+
+/* Seek Bar */
+.seek-bar {
+    -webkit-appearance: none; width: 100%; height: 4px;
+    background: rgba(255,255,255,0.3); border-radius: 2px;
+    outline: none; cursor: pointer; transition: height 0.2s;
+}
+.seek-bar:hover { height: 6px; }
+.seek-bar::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 12px; height: 12px;
+    border-radius: 50%; background: var(--accent-color);
+    cursor: pointer; margin-top: -3px; /* Вирівнювання по центру */
+}
+
+/* Інфо про відео */
+.video-info { text-align: center; margin-top: 20px; width: 280px; }
+.video-info h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
+.client-tag {
+    display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
+    background: #222; color: var(--accent-color);
+    padding: 5px 12px; border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px;
+}
+
+/* --- 8. ПОСЛУГИ --- */
+.services-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+}
+.service-card {
+    background: linear-gradient(145deg, #111, #0a0a0a);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 40px; border-radius: 20px; transition: all 0.3s ease;
+    display: flex; flex-direction: column; justify-content: space-between;
+}
+.service-card:hover {
+    background: #151515; border-color: var(--accent-color); transform: scale(1.02);
+}
+.service-title {
+    font-family: var(--font-header); font-size: 1.4rem; margin-bottom: 20px; color: #fff;
+}
+.service-desc {
+    font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 25px;
+}
+.service-btn {
+    font-weight: 700; color: var(--text-color); margin-top: auto;
+    display: flex; align-items: center; gap: 10px; cursor: pointer;
+}
+.arrow-icon { font-size: 1.2rem; color: var(--accent-color); }
+
+/* --- 9. FOOTER --- */
+.footer {
+    padding: 80px 0 40px; text-align: center; background: linear-gradient(to top, #111, transparent);
+}
+.social-links {
+    display: flex; justify-content: center; gap: 30px; margin: 30px 0;
+}
+.social-links a:hover { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
+.copyright { font-size: 0.8rem; opacity: 0.4; }
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 768px) {
+    .hero-container { flex-direction: column-reverse; text-align: center; gap: 40px;}
+    .glitch-text { font-size: 2.5rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .phone-mockup { width: 100%; max-width: 300px; height: 550px; }
+    .video-info { width: 100%; max-width: 300px; }
+}

@@ -795,4 +795,18 @@ ul { list-style: none; }
     .section-title, .subtitle {
         text-shadow: none !important;
     }
+
+    /* --- 5. ВИПРАВЛЕННЯ ЗНИКЛОГО ТЕКСТУ (ACTIVE TABS) --- */
+        /* Робимо активну кнопку фіолетовою з білим текстом */
+        .tab-btn.active {
+            background: var(--accent-color) !important; /* Фіолетовий фон */
+            color: #ffffff !important; /* Білий текст */
+            border-color: var(--accent-color) !important;
+            box-shadow: 0 0 15px rgba(123, 44, 191, 0.4) !important;
+        }
+
+        /* Для неактивних кнопок переконаємось, що текст світлий */
+        .tab-btn {
+            color: rgba(255, 255, 255, 0.7) !important;
+        }
 }

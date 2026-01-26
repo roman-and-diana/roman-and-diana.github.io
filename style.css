@@ -477,15 +477,23 @@ ul { list-style: none; }
 .prev-arrow { margin-right: 15px; }
 .next-arrow { margin-left: 15px; }
 
-/* КАРТКА ВІДГУКУ */
+/* --- КАРТКА ВІДГУКУ (Оновлена ширина) --- */
 .review-card {
-    flex: 0 0 320px; /* Трохи ширше для інфо про бренд */
+    /* Було 320px -> Стало 400px (набагато ширше) */
+    flex: 0 0 400px;
+
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
-    padding: 20px;
+
+    /* Зменшуємо бокові відступи (було 20px -> стало 15px),
+       щоб картинка мала більше місця */
+    padding: 25px 15px;
+
     scroll-snap-align: center;
     backdrop-filter: blur(10px);
+    display: flex;
+    flex-direction: column;
 }
 
 /* КОЛЬОРИ ПЛАТФОРМ (Лінії зверху) */
@@ -499,23 +507,24 @@ ul { list-style: none; }
 .tiktok .platform-icon { fill: #00f2ea; }
 
 
-/* --- НОВИЙ HEADER КАРТКИ (Бренд + Лого) --- */
+/* --- НОВИЙ HEADER КАРТКИ (ВЕЛИКИЙ СТИЛЬ ДЛЯ ВСІХ ПРИСТРОЇВ) --- */
 .card-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
+    margin-bottom: 20px; /* Більший відступ до скріншоту */
 }
 
 .brand-info {
     display: flex;
     align-items: center;
-    gap: 12px; /* Відступ між аватаркою і текстом */
+    gap: 15px; /* Більший відступ між лого і текстом */
 }
 
 .brand-logo {
-    width: 40px; height: 40px;
-    border-radius: 50%; /* Кругла аватарка */
+    width: 55px; /* Великий розмір логотипу всюди */
+    height: 55px;
+    border-radius: 50%;
     object-fit: cover;
     border: 1px solid rgba(255,255,255,0.2);
 }
@@ -526,20 +535,26 @@ ul { list-style: none; }
 }
 
 .brand-name {
-    font-size: 0.95rem;
+    font-size: 1.1rem; /* Великий, читабельний шрифт */
     font-weight: 700;
     color: #fff;
     line-height: 1.2;
+    margin-bottom: 4px;
 }
 
 .platform-name {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.5); /* Сірий підпис */
+    font-size: 0.85rem; /* Чіткий підпис соцмережі */
+    color: rgba(255,255,255,0.6);
     text-transform: uppercase;
     font-weight: 600;
+    letter-spacing: 0.5px;
 }
 
-.platform-icon { width: 24px; height: 24px; opacity: 0.8; }
+.platform-icon {
+    width: 32px; /* Велика іконка соцмережі */
+    height: 32px;
+    opacity: 0.9;
+}
 
 /* Зображення відгуку */
 .review-image-container {
@@ -551,17 +566,24 @@ ul { list-style: none; }
 .review-img { width: 100%; display: block; }
 
 
-/* --- МОБІЛЬНА ВЕРСІЯ --- */
+/* --- МОБІЛЬНА ВЕРСІЯ (Очищена від дублікатів) --- */
 @media (max-width: 768px) {
-    /* Ховаємо стрілки на телефоні (там зручніше пальцем) */
+    /* 1. Ховаємо стрілки (свайп пальцем зручніший) */
     .slider-arrow { display: none; }
 
+    /* 2. Налаштування слайдера */
     .reviews-slider {
-        padding: 20px 15%; /* Peek ефект */
+        /* Відступи по краях (20px), щоб було видно сусідні картки */
+        padding: 20px 20px;
         gap: 15px;
     }
 
+    /* 3. Широка картка */
     .review-card {
-        flex: 0 0 85%;
+        flex: 0 0 90%; /* Картка займає майже весь екран */
+        padding: 25px; /* Більше простору всередині */
     }
+
+    /* Розміри шрифтів і логотипів тепер беруться з коду вище,
+       тому тут їх дублювати не треба. Вони будуть великими автоматично. */
 }

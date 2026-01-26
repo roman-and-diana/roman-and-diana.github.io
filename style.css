@@ -268,6 +268,16 @@ ul { list-style: none; }
     border-radius: 50%;
     display: flex; align-items: center; justify-content: center;
     cursor: pointer; transition: transform 0.2s, background 0.2s;
+
+    /* Робимо ідеальне коло */
+    border-radius: 50%;
+
+    /* Робимо фон трішки прозорішим і менш помітним */
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(3px); /* Легше розмиття */
+
+    /* Тонка біла рамка додасть "преміальності" */
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 .center-play-btn:hover {
     transform: translate(-50%, -50%) scale(1.1);

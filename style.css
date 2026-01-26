@@ -410,26 +410,6 @@ ul { list-style: none; }
 .social-links a:hover { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
 .copyright { font-size: 0.8rem; opacity: 0.4; }
 
-/* --- MEDIA QUERIES (MOBILE) --- */
-@media (max-width: 768px) {
-    .hero-container {
-        flex-direction: column-reverse;
-        text-align: center;
-        gap: 40px;
-        padding-bottom: 80px;
-    }
-    .glitch-text { font-size: 2.5rem; }
-    .features-grid { grid-template-columns: 1fr; }
-    .services-grid { grid-template-columns: 1fr; }
-    .phone-mockup { width: 100%; max-width: 300px; height: 550px; }
-    .video-info { width: 100%; max-width: 300px; }
-
-    /* Сховуємо слайдер на мобільному (iOS fix) */
-    .volume-slider { display: none; }
-    .volume-container { padding: 10px; }
-    .mute-btn svg { width: 24px; height: 24px; }
-}
-
 /* --- REVIEWS SECTION UPDATE --- */
 
 .reviews-wrapper-relative {
@@ -567,8 +547,28 @@ ul { list-style: none; }
 .review-img { width: 100%; display: block; }
 
 
-/* --- МОБІЛЬНА ВЕРСІЯ (Очищена від дублікатів) --- */
+/* --- МОБІЛЬНА ВЕРСІЯ --- */
 @media (max-width: 768px) {
+    .hero-container {
+        flex-direction: column-reverse;
+        text-align: center;
+        gap: 40px;
+        padding-bottom: 80px;
+    }
+    .glitch-text { font-size: 2.5rem; }
+    .features-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .phone-mockup { width: 100%; max-width: 300px; height: 550px; }
+    .video-info { width: 100%; max-width: 300px; }
+
+    /* Сховуємо слайдер на мобільному (iOS fix) */
+    .volume-slider { display: none; }
+    .volume-container { padding: 10px; }
+    .mute-btn svg { width: 24px; height: 24px; }
+
+
+    /* --- МОБІЛЬНА ВЕРСІЯ ВІДГУКІВ --- */
+
     /* 1. Ховаємо стрілки (свайп пальцем зручніший) */
     .slider-arrow { display: none; }
 
@@ -587,5 +587,23 @@ ul { list-style: none; }
 
         /* Важливо: дозволяємо висоті підлаштовуватись під картинку */
         height: auto;
+    }
+}
+
+/* --- ПРИМУСОВЕ ВИПРАВЛЕННЯ ДЛЯ МОБІЛЬНИХ (Ще раз для впевненості) --- */
+@media (max-width: 768px) {
+    .center-play-btn {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        width: auto !important;
+        height: auto !important;
+    }
+
+    .center-play-btn .play-icon {
+        font-size: 3.5rem !important;
+        margin: 0 !important;
     }
 }

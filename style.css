@@ -1,35 +1,29 @@
-/* --- 1. ЗМІННІ ТА НАЛАШТУВАННЯ --- */
+/* =========================================
+   1. ЗМІННІ ТА БАЗОВІ НАЛАШТУВАННЯ
+   ========================================= */
 :root {
-    --bg-color: #050505;
+    --bg-color: #03000a; /* Глибокий темний */
     --text-color: #f4f4f4;
     --accent-color: #7b2cbf;
-    --accent-glow: rgba(123, 44, 191, 0.4);
-    --glass-bg: rgba(255, 255, 255, 0.05);
+    --accent-glow: rgba(123, 44, 191, 0.5);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
     --phone-border: #1a1a1a;
     --font-header: 'Unbounded', sans-serif;
     --font-body: 'Manrope', sans-serif;
 }
 
-/* ОНОВЛЕННЯ: Прибираємо блакитне виділення при натисканні */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-
-    /* Ось ця магія прибирає блакитний фон при тапі на iPhone/Android */
-    -webkit-tap-highlight-color: transparent;
-
-    /* Це прибирає рамку фокусу (якщо з'являється при кліку) */
-    outline: none;
-}
-
-/* Додатково: прибираємо синє виділення саме для кнопок і посилань */
-button, a, input {
     -webkit-tap-highlight-color: transparent;
     outline: none;
 }
 
-html { scroll-behavior: smooth; }
+html {
+    scroll-behavior: smooth;
+}
 
 body {
     background-color: var(--bg-color);
@@ -37,117 +31,98 @@ body {
     font-family: var(--font-body);
     overflow-x: hidden;
     line-height: 1.6;
+    position: relative; /* Для глобального фону */
 }
 
 a { text-decoration: none; color: inherit; transition: 0.3s; }
-button { font-family: inherit; cursor: pointer; border: none; outline: none; background: none;}
+button { font-family: inherit; cursor: pointer; border: none; outline: none; background: none; }
 ul { list-style: none; }
 
-/* --- 2. ЗАГАЛЬНІ КОМПОНЕНТИ --- */
+/* =========================================
+   2. ГЛОБАЛЬНИЙ ЖИВИЙ ФОН (AURORA)
+   ========================================= */
+.global-background {
+    position: fixed; /* Фіксуємо фон, щоб він не скролився */
+    top: 0; left: 0; width: 100%; height: 100vh;
+    z-index: -1; /* Найнижчий шар */
+    overflow: hidden;
+    pointer-events: none;
+    background: radial-gradient(circle at center, #0f0518 0%, #000000 100%);
+}
+
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(100px); /* Дуже м'яке розмиття (без пікселів) */
+    opacity: 0.45;
+    will-change: transform;
+}
+
+/* Фіолетова сфера */
+.orb-1 {
+    top: -10%; left: -10%;
+    width: 50vw; height: 50vw;
+    background: #7b2cbf;
+    animation: float 20s infinite alternate ease-in-out;
+}
+
+/* Синя сфера */
+.orb-2 {
+    bottom: -10%; right: -10%;
+    width: 40vw; height: 40vw;
+    background: #3a0ca3;
+    animation: float 25s infinite alternate-reverse ease-in-out;
+}
+
+/* Рожева сфера (акцент) */
+.orb-3 {
+    top: 40%; left: 40%;
+    width: 30vw; height: 30vw;
+    background: #f72585;
+    opacity: 0.2;
+    animation: float 18s infinite alternate ease-in-out;
+}
+
+@keyframes float {
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(50px, 100px) scale(1.1); }
+}
+
+/* Технологічна сітка поверх градієнтів */
+.grid-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image:
+        linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
+    z-index: 0;
+    mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+    -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+}
+
+
+/* =========================================
+   3. ЗАГАЛЬНІ КОМПОНЕНТИ
+   ========================================= */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-.section { padding: 80px 0; }
+
+/* Важливо: секції мають бути прозорими, щоб було видно фон */
+.section {
+    padding: 80px 0;
+    background: transparent !important;
+}
+
 .section-title {
     font-family: var(--font-header);
     font-size: 2.5rem;
     margin-bottom: 40px;
     text-transform: uppercase;
     text-align: center;
+    text-shadow: 0 0 20px rgba(123, 44, 191, 0.3);
 }
 
-/* --- 3. HERO SECTION & GLITCH --- */
-.hero-section {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    position: relative;
-    padding-top: 80px;
-}
-.hero-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    gap: 40px;
-}
-.hero-text { flex: 1; max-width: 600px; z-index: 2; }
-.hero-image-wrapper {
-    flex: 1; display: flex; justify-content: center; position: relative;
-}
-.hero-img {
-    max-width: 100%; max-height: 80vh; object-fit: contain;
-    filter: drop-shadow(0 0 30px rgba(123, 44, 191, 0.3));
-    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-}
-.subtitle {
-    font-family: var(--font-header);
-    font-size: 1.2rem;
-    font-weight: 600;
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-    color: var(--accent-color);
-    text-transform: uppercase;
-}
-.hero-desc {
-    font-size: 1.1rem; margin-bottom: 40px; opacity: 0.8; max-width: 450px;
-}
-.btn-primary {
-    display: inline-block;
-    padding: 15px 40px;
-    border: 1px solid var(--text-color);
-    border-radius: 50px;
-    font-family: var(--font-header);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    background: transparent;
-}
-.btn-primary:hover {
-    background: var(--text-color); color: var(--bg-color);
-    box-shadow: 0 0 20px rgba(255,255,255,0.4);
-}
-
-/* GLITCH EFFECT (CSS) */
-.glitch-text {
-    font-family: var(--font-header);
-    font-size: 3.5rem;
-    font-weight: 900;
-    line-height: 1.1;
-    margin-bottom: 25px;
-    position: relative;
-    color: var(--text-color);
-}
-.glitch-text::before,
-.glitch-text::after {
-    content: attr(data-text);
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    opacity: 0.8;
-}
-.glitch-text::before {
-    color: #ff00c1;
-    z-index: -1;
-    animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
-}
-.glitch-text::after {
-    color: #00fff9;
-    z-index: -2;
-    animation: glitch-anim-2 3s infinite linear alternate-reverse;
-}
-@keyframes glitch-anim-1 {
-    0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
-    20% { clip-path: inset(60% 0 10% 0); transform: translate(2px, -1px); }
-    100% { clip-path: inset(10% 0 50% 0); transform: translate(-2px, 2px); }
-}
-@keyframes glitch-anim-2 {
-    0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -1px); }
-    20% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 2px); }
-    100% { clip-path: inset(30% 0 20% 0); transform: translate(2px, -2px); }
-}
-
-/* --- 4. FLOATING CTA --- */
+/* Кнопка "Зв'язатися" */
 .floating-cta {
     position: fixed; bottom: 30px; right: 30px;
     background: var(--text-color); color: var(--bg-color);
@@ -158,16 +133,136 @@ ul { list-style: none; }
 }
 .floating-cta:hover { transform: scale(1.05); }
 
-/* --- 5. MARQUEE --- */
+
+/* =========================================
+   4. HERO SECTION
+   ========================================= */
+.hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding-top: 80px;
+    background: transparent !important;
+}
+
+.hero-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 40px;
+    z-index: 2; /* Поверх фону */
+}
+
+.hero-text { flex: 1; max-width: 600px; }
+
+.hero-image-wrapper {
+    flex: 1; display: flex; justify-content: center; position: relative;
+}
+
+.hero-img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+
+    /* Тінь і маска (залишаємо як було) */
+    filter: drop-shadow(0 0 30px rgba(123, 44, 191, 0.3));
+    mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+
+    /* --- НОВЕ: ЗАКРУГЛЕННЯ ТА РАМКА --- */
+    border-radius: 35px; /* М'які кути */
+    /* Тонка "скляна" рамка, як у інших елементів на сайті */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.subtitle {
+    font-family: var(--font-header);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+
+    /* Градієнтний текст (Від блакитного до рожевого) */
+    background: linear-gradient(90deg, #00fff9, #ff00c1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    text-shadow: 0 0 20px rgba(123, 44, 191, 0.5);
+}
+
+.hero-desc {
+    font-size: 1.1rem; margin-bottom: 40px; opacity: 0.8; max-width: 450px;
+}
+
+.btn-primary {
+    display: inline-block;
+    padding: 15px 40px;
+    border: 1px solid var(--text-color);
+    border-radius: 50px;
+    font-family: var(--font-header);
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(5px);
+}
+.btn-primary:hover {
+    background: var(--text-color); color: var(--bg-color);
+    box-shadow: 0 0 20px rgba(255,255,255,0.4);
+}
+
+/* Glitch Effect */
+.glitch-text {
+    font-family: var(--font-header);
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    margin-bottom: 25px;
+    position: relative;
+    color: var(--text-color);
+}
+.glitch-text::before, .glitch-text::after {
+    content: attr(data-text);
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
+}
+.glitch-text::before {
+    color: #ff00c1; z-index: -1;
+    animation: glitch-anim-1 2.5s infinite linear alternate-reverse;
+}
+.glitch-text::after {
+    color: #00fff9; z-index: -2;
+    animation: glitch-anim-2 3s infinite linear alternate-reverse;
+}
+@keyframes glitch-anim-1 {
+    0% { clip-path: inset(20% 0 80% 0); transform: translate(-2px, 1px); }
+    100% { clip-path: inset(10% 0 50% 0); transform: translate(-2px, 2px); }
+}
+@keyframes glitch-anim-2 {
+    0% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -1px); }
+    100% { clip-path: inset(30% 0 20% 0); transform: translate(2px, -2px); }
+}
+
+
+/* =========================================
+   5. MARQUEE (Бігучий рядок)
+   ========================================= */
 .marquee-section {
-    background: var(--glass-bg); padding: 25px 0;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    padding: 25px 0;
     overflow: hidden;
-    border-top: 1px solid rgba(255,255,255,0.1);
-    border-bottom: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
 }
 .marquee-content {
     display: flex; gap: 60px;
-    animation: scroll 12s linear infinite;
+    animation: scroll 20s linear infinite;
 }
 .marquee-content span {
     font-family: var(--font-header);
@@ -179,36 +274,67 @@ ul { list-style: none; }
 }
 @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-/* --- 6. FEATURES --- */
+
+/* =========================================
+   6. FEATURES (Чому я) - GLASS STYLE
+   ========================================= */
 .features-grid {
     display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
 }
-.feature-card {
-    background: #0f0f0f; padding: 40px 30px;
-    border-radius: 20px; border: 1px solid #222; transition: 0.3s;
-}
-.feature-card:hover { border-color: var(--accent-color); }
-.feature-number {
-    font-family: var(--font-header); font-size: 3rem; color: var(--accent-color); margin-bottom: 15px;
-}
 
-/* --- 7. PORTFOLIO TABS --- */
+.feature-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: 40px 30px;
+    border-radius: 20px;
+    transition: 0.3s;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+.feature-card:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(123, 44, 191, 0.2);
+    transform: translateY(-5px);
+}
+/* --- ОНОВЛЕНІ ЦИФРИ (Яскраві та помітні) --- */
+.feature-number {
+    font-family: var(--font-header);
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+
+    /* Білий градієнт, щоб виглядало як метал/світло */
+    background: linear-gradient(180deg, #ffffff 0%, #a5b4fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    /* Сильне світіння, щоб відділити від фону */
+    filter: drop-shadow(0 0 15px rgba(123, 44, 191, 0.8));
+}
+.feature-card p { color: rgba(255, 255, 255, 0.7); }
+
+
+/* =========================================
+   7. PORTFOLIO
+   ========================================= */
 .portfolio-tabs {
     display: flex; justify-content: center; gap: 15px; margin-bottom: 40px; flex-wrap: wrap;
 }
 .tab-btn {
-    background: transparent;
+    background: var(--glass-bg);
     color: rgba(255, 255, 255, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid var(--glass-border);
     padding: 10px 25px; border-radius: 30px;
     font-size: 0.9rem; transition: all 0.3s;
+    backdrop-filter: blur(5px);
 }
 .tab-btn:hover, .tab-btn.active {
     background: var(--text-color); color: var(--bg-color);
     border-color: var(--text-color); font-weight: 700;
 }
 
-/* --- 8. VIDEO GRID & MOCKUP --- */
 .video-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -237,29 +363,17 @@ ul { list-style: none; }
     width: 100%; height: 100%; object-fit: cover; display: block;
 }
 
-/* CONTROLS OVERLAY */
-/* ВИПРАВЛЕННЯ: Прибираємо сірий фон на все відео */
+/* Controls */
 .video-controls {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     z-index: 10;
     display: flex; flex-direction: column; justify-content: space-between;
-
-    /* Прозорість керується через JS (показувати/ховати) */
-    opacity: 0;
-    transition: opacity 0.3s;
-
-    /* ТУТ БУЛА ПОМИЛКА: background: rgba(0,0,0,0.3); */
-    /* Ставимо прозорий фон, щоб відео було чистим */
+    opacity: 0; transition: opacity 0.3s;
     background: transparent;
-
-    /* Додаємо легку тінь тільки для елементів, щоб вони не губились на світлому фоні */
     text-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
-.phone-mockup:hover .video-controls,
-.phone-mockup.is-playing .video-controls { opacity: 1; }
+.phone-mockup:hover .video-controls, .phone-mockup.is-playing .video-controls { opacity: 1; }
 
-/* AUTO HIDE CONTROLS */
 .phone-mockup.interface-hidden .bottom-controls,
 .phone-mockup.interface-hidden .center-play-btn {
     opacity: 0; visibility: hidden; pointer-events: none;
@@ -269,341 +383,371 @@ ul { list-style: none; }
     opacity: 1; visibility: visible;
 }
 
-/* --- ЦЕНТРАЛЬНА КНОПКА (Оновлено: тільки іконка) --- */
 .center-play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    /* Розміри області кліку (щоб пальцем було легко попасти) */
-    width: 80px;
-    height: 80px;
-
-    /* Центрування іконки */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    /* ПРИБИРАЄМО ФОН ПОВНІСТЮ */
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 80px; height: 80px;
+    display: flex; align-items: center; justify-content: center;
     background: transparent;
-    backdrop-filter: none;
-    border: none;
-    border-radius: 0;
-
-    /* Прибираємо синю підсвітку при кліку */
-    -webkit-tap-highlight-color: transparent;
 }
+.center-play-btn:active { transform: translate(-50%, -50%) scale(0.9); }
 
-/* Ефект при натисканні (трохи зменшується) */
-.center-play-btn:active {
-    transform: translate(-50%, -50%) scale(0.9);
-}
-
-/* --- СТИЛІ ДЛЯ SVG ІКОНКИ PLAY/PAUSE --- */
 .play-icon {
-    width: 40px;
-    height: 40px;
-    display: block;
-    fill: #fff; /* Робить іконку білою */
-    pointer-events: none; /* Щоб клік проходив крізь неї */
-    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5)); /* Тінь */
+    width: 40px; height: 40px; display: block; fill: #fff; pointer-events: none;
+    filter: drop-shadow(0 0 10px rgba(0,0,0,0.5));
 }
+.center-play-btn.paused .play-icon { width: 35px; height: 35px; }
 
-/* Коли пауза, можна трохи змінити розмір, якщо треба */
-.center-play-btn.paused .play-icon {
-    width: 35px;
-    height: 35px;
-}
-
-/* BOTTOM BAR */
 .bottom-controls {
-    margin-top: auto;
-    padding: 20px;
-    /* Градієнт тільки знизу: від чорного до прозорого */
+    margin-top: auto; padding: 20px;
     background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-    cursor: default;
 }
-.control-row {
-    display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;
-}
+.control-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
 
-/* SOUND CONTROLS (Fixes applied here) */
 .volume-container {
     display: flex; align-items: center; gap: 10px;
-    background: rgba(255,255,255,0.1);
-    padding: 6px 12px;
-    border-radius: 30px;
-    backdrop-filter: blur(4px);
+    background: rgba(255,255,255,0.1); padding: 6px 12px;
+    border-radius: 30px; backdrop-filter: blur(4px);
 }
-.mute-btn { z-index: 10; position: relative; }
-.mute-btn svg { width: 18px; height: 18px; fill: #fff; display: block; pointer-events: none; }
-
+.mute-btn svg { width: 18px; height: 18px; fill: #fff; display: block; }
 .volume-slider {
     -webkit-appearance: none; width: 80px; height: 4px;
-    background: rgba(255,255,255,0.3);
-    border-radius: 2px; outline: none; cursor: pointer;
-    z-index: 10; position: relative;
+    background: rgba(255,255,255,0.3); border-radius: 2px;
 }
 .volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%;
-    background: #fff; cursor: pointer;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: #fff;
 }
-
-/* Seek Bar */
 .seek-bar {
     -webkit-appearance: none; width: 100%; height: 4px;
-    background: rgba(255,255,255,0.3); border-radius: 2px;
-    outline: none; cursor: pointer; transition: height 0.2s;
+    background: rgba(255,255,255,0.3); border-radius: 2px; transition: height 0.2s;
 }
 .seek-bar:hover { height: 6px; }
 .seek-bar::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 12px; height: 12px;
-    border-radius: 50%; background: var(--accent-color);
-    cursor: pointer; margin-top: -3px;
+    -webkit-appearance: none; width: 12px; height: 12px; border-radius: 50%; background: var(--accent-color); margin-top: -3px;
 }
 
-/* INFO */
 .video-info { text-align: center; margin-top: 20px; width: 280px; }
 .video-info h4 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: #fff; }
 .client-tag {
     display: inline-block; font-size: 0.75rem; font-weight: 700; text-transform: uppercase;
-    background: #222; color: var(--accent-color);
-    padding: 5px 12px; border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.1); letter-spacing: 1px;
+    background: var(--glass-bg); color: var(--accent-color);
+    padding: 5px 12px; border-radius: 20px; border: 1px solid var(--glass-border);
 }
 
-/* --- 9. SERVICES --- */
-.services-grid {
-    display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
+
+/* =========================================
+   8. REVIEWS - GLASS STYLE
+   ========================================= */
+.reviews-wrapper-relative { position: relative; display: flex; align-items: center; }
+
+.reviews-slider {
+    display: flex; gap: 20px; overflow-x: auto; align-items: start;
+    padding: 20px 5px; width: 100%;
+    scroll-snap-type: x mandatory; scroll-behavior: smooth;
+    scrollbar-width: none; -ms-overflow-style: none;
 }
+.reviews-slider::-webkit-scrollbar { display: none; }
+
+.slider-arrow {
+    background: var(--glass-bg); backdrop-filter: blur(5px);
+    border: 1px solid var(--glass-border);
+    width: 45px; height: 45px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; transition: 0.3s; z-index: 5; flex-shrink: 0; fill: #fff;
+}
+.slider-arrow:hover {
+    background: var(--text-color); fill: var(--bg-color);
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+.slider-arrow svg { width: 28px; height: 28px; }
+.prev-arrow { margin-right: 15px; }
+.next-arrow { margin-left: 15px; }
+
+/* Картка відгуку (Скло) */
+.review-card {
+    flex: 0 0 400px; /* Ширина */
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    padding: 25px 15px;
+    scroll-snap-align: center;
+    display: flex; flex-direction: column;
+}
+.review-card.instagram { border-top: 2px solid #E1306C; }
+.review-card.telegram { border-top: 2px solid #0088cc; }
+.review-card.tiktok { border-top: 2px solid #00f2ea; }
+
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+.brand-info { display: flex; align-items: center; gap: 15px; }
+.brand-logo {
+    width: 55px; height: 55px; border-radius: 50%; object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+.brand-name { font-size: 1.1rem; font-weight: 700; color: #fff; line-height: 1.2; margin-bottom: 4px; }
+.platform-name {
+    font-size: 0.85rem; color: rgba(255,255,255,0.6);
+    text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;
+}
+.platform-icon { width: 32px; height: 32px; opacity: 0.9; }
+.instagram .platform-icon { fill: #E1306C; }
+.telegram .platform-icon { fill: #0088cc; }
+.tiktok .platform-icon { fill: #00f2ea; }
+
+.review-image-container {
+    width: 100%; border-radius: 12px; overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.review-img { width: 100%; display: block; }
+
+
+/* =========================================
+   9. SERVICES - GLASS STYLE
+   ========================================= */
+.services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+
 .service-card {
-    background: linear-gradient(145deg, #111, #0a0a0a);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 40px; border-radius: 20px; transition: all 0.3s ease;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: 40px; border-radius: 20px;
+    transition: all 0.3s ease;
     display: flex; flex-direction: column; justify-content: space-between;
 }
 .service-card:hover {
-    background: #151515; border-color: var(--accent-color); transform: scale(1.02);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: var(--accent-color);
+    box-shadow: 0 0 20px rgba(123, 44, 191, 0.2);
+    transform: translateY(-5px);
 }
-.service-title {
-    font-family: var(--font-header); font-size: 1.4rem; margin-bottom: 20px; color: #fff;
-}
-.service-desc {
-    font-size: 0.95rem; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 25px;
-}
+.service-title { font-family: var(--font-header); font-size: 1.4rem; margin-bottom: 20px; color: #fff; }
+.service-desc { font-size: 0.95rem; color: rgba(255,255,255,0.7); line-height: 1.6; margin-bottom: 25px; }
 .service-btn {
     font-weight: 700; color: var(--text-color); margin-top: auto;
     display: flex; align-items: center; gap: 10px; cursor: pointer;
 }
 .arrow-icon { font-size: 1.2rem; color: var(--accent-color); }
 
-/* --- 10. FOOTER --- */
+
+/* =========================================
+   10. FOOTER & MEDIA
+   ========================================= */
+/* --- ОНОВЛЕНИЙ FOOTER --- */
 .footer {
-    padding: 80px 0 40px; text-align: center; background: linear-gradient(to top, #111, transparent);
+    padding: 60px 0 40px;
+    text-align: center;
+    /* Прибираємо старий фон, бо у нас тепер глобальний */
+    background: transparent;
 }
-.social-links {
-    display: flex; justify-content: center; gap: 30px; margin: 30px 0;
+
+/* Скляна картка для контактів */
+.footer-cta-card {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 30px;
+    padding: 50px 20px;
+    max-width: 600px;
+    margin: 0 auto 40px; /* Центруємо і відступ знизу */
+
+    /* Легке світіння навколо картки */
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.2);
 }
+
+.footer-title {
+    font-family: var(--font-header);
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: #fff;
+}
+
+.footer-desc {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.6);
+    margin-bottom: 30px;
+}
+
+/* Контейнер кнопок */
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+/* Стиль кнопок-іконок */
+.social-btn {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Пружинистий ефект */
+}
+
+.social-btn svg {
+    width: 28px; height: 28px;
+    fill: #fff;
+    transition: 0.3s;
+}
+
+/* HOVER ЕФЕКТИ (Кожна кнопка має свій колір) */
+
+/* Instagram */
+.social-btn.insta:hover {
+    background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);
+    box-shadow: 0 0 20px rgba(214, 36, 159, 0.6);
+    border-color: transparent;
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Telegram */
+.social-btn.tg:hover {
+    background: #0088cc;
+    box-shadow: 0 0 20px rgba(0, 136, 204, 0.6);
+    border-color: transparent;
+    transform: translateY(-5px) scale(1.1);
+}
+
+/* Email */
+.social-btn.email:hover {
+    background: #fff;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.4);
+    border-color: transparent;
+    transform: translateY(-5px) scale(1.1);
+}
+.social-btn.email:hover svg { fill: #000; } /* Іконка стає чорною на білому */
+
+.copyright {
+    font-size: 0.8rem;
+    opacity: 0.4;
+    letter-spacing: 1px;
+}
+.social-links { display: flex; justify-content: center; gap: 30px; margin: 30px 0; }
 .social-links a:hover { color: var(--accent-color); text-shadow: 0 0 10px var(--accent-color); }
 .copyright { font-size: 0.8rem; opacity: 0.4; }
 
-/* --- REVIEWS SECTION UPDATE --- */
-
-.reviews-wrapper-relative {
-    position: relative; /* Щоб стрілки позиціонувались відносно цього блоку */
-    display: flex;
-    align-items: center;
-}
-
-/* Слайдер */
-.reviews-slider {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    align-items: start;
-    padding: 20px 5px; /* Менші відступи по боках, бо тепер є стрілки */
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth; /* Плавний скрол */
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    width: 100%;
-}
-.reviews-slider::-webkit-scrollbar { display: none; }
-
-/* СТРІЛКИ (НОВЕ) */
-.slider-arrow {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(5px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    width: 45px; height: 45px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    z-index: 5;
-    flex-shrink: 0; /* Щоб стрілки не сплющувались */
-    fill: #fff;
-}
-.slider-arrow:hover {
-    background: var(--text-color);
-    fill: var(--bg-color);
-    box-shadow: 0 0 15px rgba(255,255,255,0.4);
-}
-.slider-arrow svg { width: 28px; height: 28px; }
-
-/* Відступи для стрілок */
-.prev-arrow { margin-right: 15px; }
-.next-arrow { margin-left: 15px; }
-
-/* --- КАРТКА ВІДГУКУ (Оновлена ширина) --- */
-.review-card {
-    /* Було 320px -> Стало 400px (набагато ширше) */
-    flex: 0 0 400px;
-
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 20px;
-
-    /* Зменшуємо бокові відступи (було 20px -> стало 15px),
-       щоб картинка мала більше місця */
-    padding: 25px 15px;
-
-    scroll-snap-align: center;
-    backdrop-filter: blur(10px);
-    display: flex;
-    flex-direction: column;
-}
-
-/* КОЛЬОРИ ПЛАТФОРМ (Лінії зверху) */
-.review-card.instagram { border-top: 2px solid #E1306C; }
-.review-card.telegram { border-top: 2px solid #0088cc; }
-.review-card.tiktok { border-top: 2px solid #00f2ea; }
-
-/* КОЛІР ІКОНКИ ПЛАТФОРМИ */
-.instagram .platform-icon { fill: #E1306C; }
-.telegram .platform-icon { fill: #0088cc; }
-.tiktok .platform-icon { fill: #00f2ea; }
-
-
-/* --- НОВИЙ HEADER КАРТКИ (ВЕЛИКИЙ СТИЛЬ ДЛЯ ВСІХ ПРИСТРОЇВ) --- */
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px; /* Більший відступ до скріншоту */
-}
-
-.brand-info {
-    display: flex;
-    align-items: center;
-    gap: 15px; /* Більший відступ між лого і текстом */
-}
-
-.brand-logo {
-    width: 55px; /* Великий розмір логотипу всюди */
-    height: 55px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid rgba(255,255,255,0.2);
-}
-
-.brand-text {
-    display: flex;
-    flex-direction: column;
-}
-
-.brand-name {
-    font-size: 1.1rem; /* Великий, читабельний шрифт */
-    font-weight: 700;
-    color: #fff;
-    line-height: 1.2;
-    margin-bottom: 4px;
-}
-
-.platform-name {
-    font-size: 0.85rem; /* Чіткий підпис соцмережі */
-    color: rgba(255,255,255,0.6);
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-spacing: 0.5px;
-}
-
-.platform-icon {
-    width: 32px; /* Велика іконка соцмережі */
-    height: 32px;
-    opacity: 0.9;
-}
-
-/* Зображення відгуку */
-.review-image-container {
-    width: 100%;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-.review-img { width: 100%; display: block; }
-
-
-/* --- МОБІЛЬНА ВЕРСІЯ --- */
 @media (max-width: 768px) {
-    .hero-container {
-        flex-direction: column-reverse;
-        text-align: center;
-        gap: 40px;
-        padding-bottom: 80px;
-    }
+    .hero-container { flex-direction: column-reverse; text-align: center; gap: 40px; padding-bottom: 80px; }
     .glitch-text { font-size: 2.5rem; }
-    .features-grid { grid-template-columns: 1fr; }
-    .services-grid { grid-template-columns: 1fr; }
-    .phone-mockup { width: 100%; max-width: 300px; height: 550px; }
-    .video-info { width: 100%; max-width: 300px; }
+    .features-grid, .services-grid { grid-template-columns: 1fr; }
+    .phone-mockup, .video-info { width: 100%; max-width: 300px; }
 
-    /* Сховуємо слайдер на мобільному (iOS fix) */
     .volume-slider { display: none; }
     .volume-container { padding: 10px; }
     .mute-btn svg { width: 24px; height: 24px; }
 
-
-    /* --- МОБІЛЬНА ВЕРСІЯ ВІДГУКІВ --- */
-
-    /* 1. Ховаємо стрілки (свайп пальцем зручніший) */
     .slider-arrow { display: none; }
+    .reviews-slider { padding: 20px 20px; gap: 15px; }
+    .review-card { flex: 0 0 90%; padding: 20px 12px; height: auto; }
 
-    /* 2. Налаштування слайдера */
-    .reviews-slider {
-        /* Відступи по краях (20px), щоб було видно сусідні картки */
-        padding: 20px 20px;
-        gap: 15px;
+    .center-play-btn {
+        background: transparent !important; backdrop-filter: none !important;
+        border: none !important; box-shadow: none !important;
+        width: auto !important; height: auto !important;
     }
-
-    /* 3. Широка картка */
-    .review-card {
-        flex: 0 0 90%; /* Картка займає майже весь екран */
-        /* Зменшуємо внутрішні відступи до мінімуму */
-        padding: 20px 12px;
-
-        /* Важливо: дозволяємо висоті підлаштовуватись під картинку */
-        height: auto;
-    }
+    .center-play-btn .play-icon { font-size: 3.5rem !important; margin: 0 !important; }
 }
 
-/* --- ПРИМУСОВЕ ВИПРАВЛЕННЯ ДЛЯ МОБІЛЬНИХ (Ще раз для впевненості) --- */
-@media (max-width: 768px) {
-    .center-play-btn {
-        background: transparent !important;
-        backdrop-filter: none !important;
-        -webkit-backdrop-filter: none !important;
-        border: none !important;
-        box-shadow: none !important;
-        width: auto !important;
-        height: auto !important;
-    }
+/* --- CUSTOM SCROLLBAR --- */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #03000a;
+}
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-color);
+}
 
-    .center-play-btn .play-icon {
-        font-size: 3.5rem !important;
-        margin: 0 !important;
-    }
+/* Колір виділення тексту (коли мишкою виділяють) */
+::selection {
+    background: var(--accent-color);
+    color: #fff;
+}
+
+/* Стилі для іконок в картках Why Me */
+.feature-card {
+    position: relative;
+    overflow: hidden; /* Щоб іконка не вилазила */
+}
+
+.feature-icon-bg {
+    position: absolute;
+    top: -20px; right: -20px;
+    width: 120px; height: 120px;
+    opacity: 0.05; /* Дуже прозорі */
+    transform: rotate(15deg);
+    transition: 0.3s;
+    pointer-events: none;
+}
+
+.feature-card:hover .feature-icon-bg {
+    opacity: 0.1; /* Трохи яскравіше при наведенні */
+    transform: rotate(0deg) scale(1.1);
+}
+
+.feature-icon-bg svg {
+    width: 100%; height: 100%;
+    fill: #fff;
+}
+
+/* --- ОНОВЛЕНІ ПОСЛУГИ --- */
+.service-card {
+    position: relative; /* Щоб позиціонувати іконку */
+    overflow: hidden;   /* Ховаємо зайве */
+    /* ... ваші старі стилі glassmorphism залишаються тут ... */
+}
+
+/* Велика прозора іконка на фоні */
+.service-icon-bg {
+    position: absolute;
+    top: -10px; right: -10px;
+    width: 100px; height: 100px;
+    opacity: 0.03; /* Дуже-дуже прозора */
+    transform: rotate(10deg);
+    transition: all 0.5s ease;
+    pointer-events: none;
+}
+
+.service-icon-bg svg {
+    width: 100%; height: 100%;
+    fill: #fff;
+}
+
+/* Ефект при наведенні: іконка стає трохи яскравішою і рухається */
+.service-card:hover .service-icon-bg {
+    opacity: 0.1;
+    transform: rotate(0deg) scale(1.1);
+    top: -5px; right: -5px;
+}
+
+/* Кнопка "Замовити" */
+.service-btn {
+    margin-top: auto;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #fff;
+    border-bottom: 1px solid transparent;
+    transition: 0.3s;
+    width: fit-content;
+}
+
+.service-btn:hover {
+    color: var(--accent-color);
+    border-bottom: 1px solid var(--accent-color);
+}
+
+.service-btn .arrow-icon {
+    transition: transform 0.3s;
+}
+
+.service-btn:hover .arrow-icon {
+    transform: translateX(5px); /* Стрілочка їде вправо */
 }

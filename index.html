@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<a href="https://t.me/your_telegram" target="_blank" class="floating-cta">
+<a href="https://www.instagram.com/diana.tsiolkovska" target="_blank" class="floating-cta">
     <span>Зв'язатися</span>
     <span>✈️</span>
 </a>
@@ -84,7 +84,7 @@
 
             <div class="portfolio-item" data-category="ugc">
                 <div class="phone-mockup">
-                    <video class="video-element" src="assets/bogenia_spf.mp4" preload="metadata" loop playsinline muted></video>
+                    <video class="video-element" src="assets/bogenia_spf.mp4" poster="assets/bogenia_spf_poster.jpeg" preload="metadata" loop playsinline muted></video>
 
                     <div class="video-controls">
                         <div class="center-play-btn paused"><span class="play-icon">||</span></div>
@@ -283,13 +283,11 @@
                 if (video !== currentVideo) {
                     video.muted = true;
                     video.volume = 0;
-                    // Також ставимо на паузу, щоб не вантажити систему
                     video.pause();
 
                     if(muteBtn) muteBtn.innerHTML = iconSoundOff;
                     if(volumeSlider) volumeSlider.value = 0;
 
-                    // Оновлюємо кнопки паузи сусідів
                     const playIcon = mockup.querySelector('.play-icon');
                     const playBtnBlock = mockup.querySelector('.center-play-btn');
                     if(playIcon) {
@@ -312,6 +310,9 @@
 
             let isManuallyMuted = true;
             let isHoveringControls = false;
+
+            // НОВЕ: Змінна для таймера повернення постера
+            let returnToPosterTimeout;
 
             function updateUI() {
                 // Play/Pause
@@ -340,7 +341,7 @@
             video.volume = 0;
             muteBtn.innerHTML = iconSoundOff;
             if(volumeSlider) volumeSlider.value = 0;
-            updateUI(); // Тільки оновлюємо UI, не запускаємо відео самі
+            updateUI();
 
             // --- Control Hover Logic ---
             const controls = [muteBtn, volumeSlider, playBtnBlock];
@@ -354,6 +355,10 @@
             mockup.addEventListener('mouseenter', () => {
                 if (window.matchMedia("(min-width: 769px)").matches) {
                     if (isHoveringControls) return;
+
+                    // НОВЕ: Якщо ми навели мишку, скасовуємо таймер постера
+                    clearTimeout(returnToPosterTimeout);
+
                     muteAllExcept(video);
                     if (isManuallyMuted === false || video.paused) {
                         video.muted = false;
@@ -369,7 +374,6 @@
             mockup.addEventListener('mouseleave', () => {
                 if (window.matchMedia("(min-width: 769px)").matches) {
                     video.muted = true;
-                    // Не паузимо, щоб не смикалось
                     updateUI();
                 }
             });
@@ -382,7 +386,7 @@
                 const hasSound = !video.muted && video.volume > 0.1;
 
                 if (!hasSound) {
-                    // Увімкнути
+                    clearTimeout(returnToPosterTimeout); // Скасовуємо повернення до постера
                     muteAllExcept(video);
                     video.muted = false;
                     video.volume = 1;
@@ -390,7 +394,6 @@
                     isManuallyMuted = false;
                     if(video.paused) video.play();
                 } else {
-                    // Вимкнути
                     video.muted = true;
                     video.volume = 0;
                     if(volumeSlider) volumeSlider.value = 0;
@@ -405,6 +408,7 @@
                     volumeSlider.addEventListener(evt, e => e.stopPropagation())
                 );
                 volumeSlider.addEventListener('input', (e) => {
+                    clearTimeout(returnToPosterTimeout);
                     const val = parseFloat(e.target.value);
                     video.volume = val;
                     if(val > 0) {
@@ -423,8 +427,8 @@
             mockup.addEventListener('click', (e) => {
                 if (muteBtn.contains(e.target) || (volumeSlider && volumeSlider.contains(e.target))) return;
 
-                // Якщо не клікнули на нижні контроли
                 if (!e.target.closest('.bottom-controls') && !e.target.closest('.center-play-btn')) {
+                    clearTimeout(returnToPosterTimeout); // Скасовуємо таймер
                     muteAllExcept(video);
                     video.muted = false;
                     video.volume = 1;
@@ -438,6 +442,9 @@
             // 5. Play Button
             playBtnBlock.addEventListener('click', (e) => {
                 e.stopPropagation();
+                // НОВЕ: Скасовуємо таймер при кліку
+                clearTimeout(returnToPosterTimeout);
+
                 if (video.paused) {
                     muteAllExcept(video);
                     video.muted = false;
@@ -461,6 +468,7 @@
             });
             seekBar.addEventListener('input', () => {
                 isDragging = true;
+                clearTimeout(returnToPosterTimeout); // При перемотці не скидаємо
                 video.pause();
                 const time = (seekBar.value / 100) * video.duration;
                 video.currentTime = time;
@@ -471,7 +479,28 @@
                 updateUI();
             });
 
-            // --- Interface Auto-Hide ---
+            // --- НОВЕ: ЛОГІКА ПОВЕРНЕННЯ ДО ПОСТЕРА (3 секунди) ---
+
+            // Якщо натиснули паузу — запускаємо відлік
+            video.addEventListener('pause', () => {
+                // Якщо це не перетягування повзунка, а реальна пауза
+                if (!isDragging) {
+                    clearTimeout(returnToPosterTimeout);
+                    returnToPosterTimeout = setTimeout(() => {
+                        // Ця магічна команда скидає відео на початок і показує постер
+                        video.load();
+                        updateUI(); // Оновлюємо іконки (щоб Play знову став трикутником)
+                    }, 3000); // 3000 мс = 3 секунди
+                }
+            });
+
+            // Якщо натиснули Play — скасовуємо відлік (раптом користувач передумав)
+            video.addEventListener('play', () => {
+                clearTimeout(returnToPosterTimeout);
+            });
+
+
+            // --- Interface Auto-Hide (залишаємо як було) ---
             let hideControlsTimeout;
             function showControls() {
                 mockup.classList.remove('interface-hidden');
@@ -501,10 +530,11 @@
                 if (!entry.isIntersecting) {
                     const video = entry.target.querySelector('video');
                     if (video) {
-                        video.pause(); // Економимо батарею
+                        video.pause();
                         video.muted = true;
+                        // Тут можна також зразу скинути на постер, щоб було красиво
+                        // video.load();
 
-                        // Оновлюємо UI вручну
                         const mockup = entry.target;
                         const playIcon = mockup.querySelector('.play-icon');
                         const playBtnBlock = mockup.querySelector('.center-play-btn');

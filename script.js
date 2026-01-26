@@ -222,14 +222,14 @@ document.addEventListener('DOMContentLoaded', () => {
             updateUI();
         });
 
-        // --- ЛОГІКА ПОВЕРНЕННЯ ДО ПОСТЕРА (3 секунди) ---
+        // --- ЛОГІКА ПОВЕРНЕННЯ ДО ПОСТЕРА (5 секунд) ---
         video.addEventListener('pause', () => {
             if (!isDragging) {
                 clearTimeout(returnToPosterTimeout);
                 returnToPosterTimeout = setTimeout(() => {
                     video.load();
                     updateUI();
-                }, 3000);
+                }, 5000);
             }
         });
         video.addEventListener('play', () => {

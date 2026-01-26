@@ -429,3 +429,139 @@ ul { list-style: none; }
     .volume-container { padding: 10px; }
     .mute-btn svg { width: 24px; height: 24px; }
 }
+
+/* --- REVIEWS SECTION UPDATE --- */
+
+.reviews-wrapper-relative {
+    position: relative; /* Щоб стрілки позиціонувались відносно цього блоку */
+    display: flex;
+    align-items: center;
+}
+
+/* Слайдер */
+.reviews-slider {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 20px 5px; /* Менші відступи по боках, бо тепер є стрілки */
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth; /* Плавний скрол */
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+}
+.reviews-slider::-webkit-scrollbar { display: none; }
+
+/* СТРІЛКИ (НОВЕ) */
+.slider-arrow {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 5;
+    flex-shrink: 0; /* Щоб стрілки не сплющувались */
+    fill: #fff;
+}
+.slider-arrow:hover {
+    background: var(--text-color);
+    fill: var(--bg-color);
+    box-shadow: 0 0 15px rgba(255,255,255,0.4);
+}
+.slider-arrow svg { width: 28px; height: 28px; }
+
+/* Відступи для стрілок */
+.prev-arrow { margin-right: 15px; }
+.next-arrow { margin-left: 15px; }
+
+/* КАРТКА ВІДГУКУ */
+.review-card {
+    flex: 0 0 320px; /* Трохи ширше для інфо про бренд */
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 20px;
+    scroll-snap-align: center;
+    backdrop-filter: blur(10px);
+}
+
+/* КОЛЬОРИ ПЛАТФОРМ (Лінії зверху) */
+.review-card.instagram { border-top: 2px solid #E1306C; }
+.review-card.telegram { border-top: 2px solid #0088cc; }
+.review-card.tiktok { border-top: 2px solid #00f2ea; }
+
+/* КОЛІР ІКОНКИ ПЛАТФОРМИ */
+.instagram .platform-icon { fill: #E1306C; }
+.telegram .platform-icon { fill: #0088cc; }
+.tiktok .platform-icon { fill: #00f2ea; }
+
+
+/* --- НОВИЙ HEADER КАРТКИ (Бренд + Лого) --- */
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.brand-info {
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Відступ між аватаркою і текстом */
+}
+
+.brand-logo {
+    width: 40px; height: 40px;
+    border-radius: 50%; /* Кругла аватарка */
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.brand-name {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.2;
+}
+
+.platform-name {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.5); /* Сірий підпис */
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.platform-icon { width: 24px; height: 24px; opacity: 0.8; }
+
+/* Зображення відгуку */
+.review-image-container {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+.review-img { width: 100%; display: block; }
+
+
+/* --- МОБІЛЬНА ВЕРСІЯ --- */
+@media (max-width: 768px) {
+    /* Ховаємо стрілки на телефоні (там зручніше пальцем) */
+    .slider-arrow { display: none; }
+
+    .reviews-slider {
+        padding: 20px 15%; /* Peek ефект */
+        gap: 15px;
+    }
+
+    .review-card {
+        flex: 0 0 85%;
+    }
+}

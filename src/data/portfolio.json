@@ -1,0 +1,62 @@
+[
+  {
+    "folder": "bogenia_peel_gel",
+    "category": "beauty",
+    "title": "Огляд Peel Gel",
+    "brand": "Bogenia"
+  },
+  {
+    "folder": "bogenia_shampoo",
+    "category": "beauty",
+    "title": "Огляд шампуня",
+    "brand": "Bogenia"
+  },
+  {
+    "folder": "bogenia_spf",
+    "category": "beauty",
+    "title": "Огляд SPF крему",
+    "brand": "Bogenia"
+  },
+  {
+    "folder": "genabelle_3_in_1",
+    "category": "beauty",
+    "title": "Огляд Aquaporin лінійки",
+    "brand": "Genabelle"
+  },
+  {
+    "folder": "gerdan_robber",
+    "category": "jewelry",
+    "title": "Ювелірні прикраси",
+    "brand": "Gerdan Jewelry"
+  },
+  {
+    "folder": "lifestyle_clothes",
+    "category": "fashion",
+    "title": "Fashion Look",
+    "brand": "Lifestyle"
+  },
+  {
+    "folder": "losyny",
+    "category": "fashion",
+    "title": "Огляд лосинів",
+    "brand": "Лосини"
+  },
+  {
+    "folder": "neverti_pomady_1",
+    "category": "beauty",
+    "title": "Огляд помад 1",
+    "brand": "Neverti"
+  },
+  {
+    "folder": "neverti_pomady_2",
+    "category": "beauty",
+    "title": "Огляд помад 2",
+    "brand": "Neverti"
+  },
+  {
+    "folder": "whiteandwhite",
+    "category": "commercial",
+    "title": "Стоматологія",
+    "brand": "White & White Lviv"
+  }
+]

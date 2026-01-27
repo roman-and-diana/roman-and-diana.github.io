@@ -1,0 +1,16 @@
+/**
+ * Main CSS Entry Point
+ * Imports all modular CSS files
+ */
+
+/* Variables - Must be loaded first */
+@import url('variables.css');
+
+/* Base styles and resets */
+@import url('base.css');
+
+/* Component styles */
+@import url('components/background.css');
+@import url('components/hero.css');
+@import url('components/marquee.css');
+@import url('components/features-portfolio-reviews.css');

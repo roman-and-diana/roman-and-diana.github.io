@@ -1,0 +1,42 @@
+/* =========================================
+   MARQUEE (Scrolling Brand Banner)
+   ========================================= */
+
+.marquee-section {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    padding: 25px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.marquee-content {
+    display: flex;
+    gap: 60px;
+    animation: scroll 20s linear infinite;
+}
+
+.marquee-content span {
+    font-family: var(--font-header);
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.8);
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    white-space: nowrap;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .marquee-section {
+        backdrop-filter: blur(6px);
+    }
+}

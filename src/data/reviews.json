@@ -1,0 +1,37 @@
+[
+  {
+    "type": "instagram",
+    "brand": "Bogenia",
+    "platform": "Instagram",
+    "logo": "assets/logos/logo_bogenia.png",
+    "image": "assets/reviews/review_bogenia.png"
+  },
+  {
+    "type": "instagram",
+    "brand": "Fitoproduct",
+    "platform": "Instagram",
+    "logo": "assets/logos/logo_fitoproduct.png",
+    "image": "assets/reviews/review_fitoproduct.png"
+  },
+  {
+    "type": "instagram",
+    "brand": "White & White",
+    "platform": "Instagram",
+    "logo": "assets/logos/logo_whiteandwhite.png",
+    "image": "assets/reviews/review_whiteandwhite.png"
+  },
+  {
+    "type": "instagram",
+    "brand": "Gerdan Jewelry",
+    "platform": "Instagram",
+    "logo": "assets/logos/logo_gerdan.png",
+    "image": "assets/reviews/review_gerdan.png"
+  },
+  {
+    "type": "instagram",
+    "brand": "2wenty5ive",
+    "platform": "Instagram",
+    "logo": "assets/logos/logo_2wenty5ive.png",
+    "image": "assets/reviews/review_2wenty5ive.png"
+  }
+]

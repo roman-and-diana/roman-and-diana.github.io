@@ -1,0 +1,33 @@
+/* =========================================
+   CSS VARIABLES
+   ========================================= */
+:root {
+    /* Colors */
+    --bg-color: #03000a;
+    --text-color: #f4f4f4;
+    --accent-color: #7b2cbf;
+    --accent-glow: rgba(123, 44, 191, 0.5);
+    --glass-bg: rgba(255, 255, 255, 0.03);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --phone-border: #1a1a1a;
+
+    /* Typography */
+    --font-header: 'Unbounded', sans-serif;
+    --font-body: 'Manrope', sans-serif;
+
+    /* Spacing */
+    --section-padding: 80px;
+    --container-max-width: 1200px;
+    --container-padding: 20px;
+
+    /* Transitions */
+    --transition-fast: 0.2s;
+    --transition-normal: 0.3s;
+    --transition-slow: 0.5s;
+
+    /* Border Radius */
+    --radius-small: 12px;
+    --radius-medium: 20px;
+    --radius-large: 35px;
+    --radius-round: 50px;
+}

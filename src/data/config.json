@@ -1,0 +1,20 @@
+{
+  "brands": [
+    "Bogenia",
+    "Fitoproduct",
+    "White & White",
+    "Gerdan Jewelry",
+    "Neverti",
+    "Genabelle",
+    "Blacktouch",
+    "2wenty5ive"
+  ],
+  "categories": [
+    { "filter": "all", "name": "Всі", "active": 0 },
+    { "filter": "ugc", "name": "UGC Реклама", "active": 0 },
+    { "filter": "beauty", "name": "Beauty & Care", "active": 1 },
+    { "filter": "fashion", "name": "Fashion & Style", "active": 0 },
+    { "filter": "jewelry", "name": "Jewelry", "active": 0 },
+    { "filter": "commercial", "name": "Commercial", "active": 0 }
+  ]
+}

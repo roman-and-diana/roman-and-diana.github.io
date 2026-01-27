@@ -12,6 +12,13 @@
 
 html {
     scroll-behavior: smooth;
+    /* Fix mobile browser UI jumping */
+    height: 100%;
+    overflow-x: hidden;
+    /* Prevent rubber band effect on iOS */
+    overscroll-behavior: none;
+    /* Smooth scrolling on mobile */
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -21,6 +28,9 @@ body {
     overflow-x: hidden;
     line-height: 1.6;
     position: relative;
+    /* Fix mobile viewport height issues */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
 }
 
 a {

@@ -141,6 +141,9 @@
     filter: drop-shadow(0 0 30px rgba(123, 44, 191, 0.3));
     border-radius: 35px;
     display: block;
+    /* Gradient fade at bottom */
+    mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
 /* Floating CTA Button */
@@ -167,6 +170,12 @@
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+    .hero-section {
+        /* Fix mobile viewport height */
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+
     .hero-container {
         flex-direction: column-reverse;
         text-align: center;
@@ -176,5 +185,19 @@
 
     .glitch-text {
         font-size: 2.5rem;
+    }
+
+    /* Prevent image scaling on scroll */
+    .hero-image-wrapper {
+        position: relative;
+        will-change: auto;
+    }
+
+    .hero-img {
+        /* Fix position to prevent scaling */
+        position: relative;
+        transform: none !important;
+        will-change: auto;
+        max-height: 60vh;
     }
 }

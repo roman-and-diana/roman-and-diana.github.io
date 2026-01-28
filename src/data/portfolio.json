@@ -1,62 +1,120 @@
 [
   {
+    "folder": "gerdan_robber",
+    "category": "plot",
+    "title": "Plot-Video | Ювелірні прикраси",
+    "brand": "Gerdan Jewelry"
+  },
+  {
+    "folder": "genabelle_balsam_robber",
+    "category": "plot",
+    "title": "Plot-Video | Зволожуючий бальзам для губ",
+    "brand": "Genabelle"
+  },
+  {
+    "folder": "neverti_praga_pudra",
+    "category": "plot",
+    "title": "Plot-Video | Пудра для обличчя",
+    "brand": "Neverti"
+  },
+  {
     "folder": "bogenia_peel_gel",
-    "category": "beauty",
-    "title": "Огляд Peel Gel",
+    "category": "plot",
+    "title": "Plot-Video | Скраб для обличчя",
     "brand": "Bogenia"
   },
   {
     "folder": "bogenia_shampoo",
-    "category": "beauty",
-    "title": "Огляд шампуня",
+    "category": "plot",
+    "title": "Plot-Video | Догляд за волоссям",
+    "brand": "Bogenia"
+  },
+  
+  
+  {
+    "folder": "bogenia_dubai_krem",
+    "category": "ugc",
+    "title": "UGC-Video | Креми для рук",
     "brand": "Bogenia"
   },
   {
+    "folder": "neverti_matova_pomada",
+    "category": "ugc",
+    "title": "UGC-Video | Матова помада",
+    "brand": "Neverti"
+  },
+  {
     "folder": "bogenia_spf",
-    "category": "beauty",
-    "title": "Огляд SPF крему",
+    "category": "ugc",
+    "title": "UGC-Video | SPF крем",
     "brand": "Bogenia"
   },
   {
     "folder": "genabelle_3_in_1",
-    "category": "beauty",
-    "title": "Огляд Aquaporin лінійки",
+    "category": "ugc",
+    "title": "UGC-Video | Догляд за обличчям",
     "brand": "Genabelle"
   },
   {
-    "folder": "gerdan_robber",
-    "category": "jewelry",
-    "title": "Ювелірні прикраси",
-    "brand": "Gerdan Jewelry"
+    "folder": "neverti_blysk",
+    "category": "ugc",
+    "title": "UGC-Video | Блиск для губ",
+    "brand": "Neverti"
+  },
+  {
+    "folder": "neverti_balsam",
+    "category": "ugc",
+    "title": "UGC-Video | Помада-бальзам",
+    "brand": "Neverti"
+  },
+  {
+    "folder": "bodenia_blysk",
+    "category": "ugc",
+    "title": "UGC-Video | Блиск для губ",
+    "brand": "Bogenia"
+  },
+  {
+    "folder": "whiteandwhite",
+    "category": "ugc",
+    "title": "UGC-Video | Стоматологія",
+    "brand": "White & White Lviv"
+  },
+
+
+  {
+    "folder": "flat_jump_clothes",
+    "category": "fashion",
+    "title": "Style-Video | Get Ready With Me",
+    "brand": "Lifestyle"
+  },
+  {
+    "folder": "parking_clothes",
+    "category": "fashion",
+    "title": "Style-Video | Спортивний костюм",
+    "brand": "Lifestyle"
   },
   {
     "folder": "lifestyle_clothes",
     "category": "fashion",
-    "title": "Fashion Look",
+    "title": "Style-Video | Показ різних луків",
+    "brand": "Lifestyle"
+  },
+  {
+    "folder": "lifestyle_clothes_2",
+    "category": "fashion",
+    "title": "Style-Video | Fashion Look",
+    "brand": "Lifestyle"
+  },
+  {
+    "folder": "lifestyle_kopalniku",
+    "category": "fashion",
+    "title": "Style-Video | Купальники",
     "brand": "Lifestyle"
   },
   {
     "folder": "losyny",
     "category": "fashion",
-    "title": "Огляд лосинів",
+    "title": "Style-Video | Лосини",
     "brand": "Лосини"
-  },
-  {
-    "folder": "neverti_pomady_1",
-    "category": "beauty",
-    "title": "Огляд помад 1",
-    "brand": "Neverti"
-  },
-  {
-    "folder": "neverti_pomady_2",
-    "category": "beauty",
-    "title": "Огляд помад 2",
-    "brand": "Neverti"
-  },
-  {
-    "folder": "whiteandwhite",
-    "category": "commercial",
-    "title": "Стоматологія",
-    "brand": "White & White Lviv"
   }
 ]

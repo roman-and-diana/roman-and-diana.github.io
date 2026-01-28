@@ -11,10 +11,8 @@
   ],
   "categories": [
     { "filter": "all", "name": "Всі", "active": 0 },
-    { "filter": "ugc", "name": "UGC Реклама", "active": 0 },
-    { "filter": "beauty", "name": "Beauty & Care", "active": 1 },
-    { "filter": "fashion", "name": "Fashion & Style", "active": 0 },
-    { "filter": "jewelry", "name": "Jewelry", "active": 0 },
-    { "filter": "commercial", "name": "Commercial", "active": 0 }
+    { "filter": "plot", "name": "Сюжетні UGC", "active": 1 },
+    { "filter": "ugc", "name": "UGC Beauty", "active": 0 },
+    { "filter": "fashion", "name": "Fashion & Style", "active": 0 }
   ]
 }

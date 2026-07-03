@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://diana-creator.site/sitemap.xml

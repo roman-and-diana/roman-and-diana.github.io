@@ -6,7 +6,7 @@ import { PortfolioFilter } from './PortfolioFilter.js';
 import { VideoPlayer } from './VideoPlayer.js';
 import { ReviewsComponent } from './ReviewsComponent.js';
 import { ReviewsSlider } from './ReviewsSlider.js';
-import { ContactCTA } from './ContactCTA.js';
+import { initAnalytics } from './analytics.js';
 
 /**
  * Main application initialization
@@ -60,8 +60,8 @@ class PortfolioApp {
         new ReviewsComponent('.reviews-slider', this.reviews);
         new ReviewsSlider('.reviews-slider', '.prev-arrow', '.next-arrow');
 
-        // Open Instagram app directly on mobile (profile), web fallback
-        new ContactCTA('.floating-cta', 'diana.tsiolkovska');
+        // Track CTA/contact-button clicks (GA4)
+        initAnalytics();
     }
 
     /**

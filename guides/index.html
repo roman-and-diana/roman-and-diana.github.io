@@ -1,246 +1,182 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Гайди по AI — промпти та туторіали | @diana.tsiolkovska</title>
-<meta name="description" content="Безкоштовні гайди по AI від Діани Ціолковської: готові промпти для генерації та редагування фото, туторіали по нейромережах.">
-<link rel="canonical" href="https://diana-creator.site/guides/">
-<meta name="theme-color" content="#07060A">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#03000a">
 
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://diana-creator.site/guides/">
-<meta property="og:title" content="Гайди по AI — промпти та туторіали">
-<meta property="og:description" content="Безкоштовні гайди від @diana.tsiolkovska: готові промпти для генерації та редагування фото, туторіали по нейромережах.">
-<meta property="og:image" content="https://diana-creator.site/assets/me.png">
-<meta property="og:locale" content="uk_UA">
-<meta property="og:site_name" content="Diana Tsiolkovska">
+    <!-- Google Analytics 4 (Measurement ID G-055CLTDZQ2) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-055CLTDZQ2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-055CLTDZQ2');
+    </script>
 
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Гайди по AI — промпти та туторіали">
-<meta name="twitter:description" content="Безкоштовні гайди від @diana.tsiolkovska: готові промпти та туторіали по нейромережах.">
-<meta name="twitter:image" content="https://diana-creator.site/assets/me.png">
+    <title>Безкоштовні AI-гайди | Diana Tsiolkovska</title>
+    <meta name="description"
+          content="Безкоштовні гайди по AI від Diana Tsiolkovska: готові промпти для генерації та редагування фото. Копіюй і використовуй.">
+    <link rel="canonical" href="https://diana-creator.site/guides/">
 
-<link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
-<link rel="icon" href="/assets/me.png" type="image/png" sizes="32x32">
-<link rel="apple-touch-icon" href="/assets/me.png">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://diana-creator.site/guides/">
+    <meta property="og:title" content="Безкоштовні AI-гайди | Diana Tsiolkovska">
+    <meta property="og:description" content="Готові промпти для генерації та редагування фото. Копіюй в один клік і використовуй.">
+    <meta property="og:image" content="https://diana-creator.site/assets/me.png">
+    <meta property="og:locale" content="uk_UA">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@300;500;700&family=Manrope:wght@400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#07060A;
-  --surface:#100D16;
-  --surface-2:#181320;
-  --line:rgba(255,255,255,.09);
-  --white:#FFFFFF;
-  --body:#E9E5F0;
-  --muted:#8F87A0;
-  --pink:#FF3E86;
-  --lilac:#B98CFF;
-  --gold:#F5D26B;
-  --maxw:860px;
-}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  background:var(--ink);
-  color:var(--body);
-  font-family:'Manrope',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-  font-size:17px;
-  line-height:1.65;
-  -webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Безкоштовні AI-гайди | Diana Tsiolkovska">
+    <meta name="twitter:description" content="Готові промпти для генерації та редагування фото. Копіюй в один клік і використовуй.">
+    <meta name="twitter:image" content="https://diana-creator.site/assets/me.png">
 
-/* ---------- HERO ---------- */
-.hero{position:relative;overflow:hidden;padding:0 0 56px}
-.ceiling{
-  position:absolute;top:0;left:50%;transform:translateX(-50%);
-  width:180%;height:420px;
-  perspective:520px;perspective-origin:50% 0%;
-  pointer-events:none;
-}
-.ceiling__grid{
-  position:absolute;inset:-40% -10% 0;
-  transform:rotateX(64deg);
-  transform-origin:50% 0%;
-  background-image:
-    linear-gradient(rgba(255,62,134,.30) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(185,140,255,.24) 1px, transparent 1px);
-  background-size:74px 74px;
-  mask-image:linear-gradient(to bottom, rgba(0,0,0,.95), transparent 72%);
-  -webkit-mask-image:linear-gradient(to bottom, rgba(0,0,0,.95), transparent 72%);
-}
-.ceiling__glow{
-  position:absolute;top:-160px;left:50%;transform:translateX(-50%);
-  width:620px;height:340px;border-radius:50%;
-  background:radial-gradient(ellipse at center, rgba(255,62,134,.22), transparent 68%);
-  filter:blur(20px);
-}
-.hero__inner{position:relative;padding-top:88px}
-.backlink{
-  display:inline-block;font-family:'JetBrains Mono',monospace;
-  font-size:12px;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);text-decoration:none;margin:0 0 20px;
-  transition:color .2s;
-}
-.backlink:hover{color:var(--pink)}
-.eyebrow{
-  font-family:'JetBrains Mono',monospace;
-  font-size:12px;letter-spacing:.22em;text-transform:uppercase;
-  color:var(--lilac);margin:0 0 22px;
-}
-h1{
-  font-family:'Unbounded','Manrope',sans-serif;
-  font-weight:700;font-size:clamp(38px,7.2vw,62px);
-  line-height:1.04;letter-spacing:-.02em;
-  color:var(--white);margin:0 0 20px;
-}
-h1 .accent{color:var(--pink)}
-.lede{font-size:19px;color:var(--muted);max-width:560px;margin:0 0 36px}
-.lede strong{color:var(--body);font-weight:500}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600&family=Unbounded:wght@300;600;900&display=swap"
+          rel="stylesheet">
 
-/* ---------- author ---------- */
-.author{
-  display:flex;align-items:center;gap:16px;
-  padding:14px 20px 14px 14px;border:1px solid var(--line);
-  border-radius:999px;background:var(--surface);width:fit-content;
-}
-.author img{width:52px;height:52px;border-radius:50%;object-fit:cover;display:block}
-.author__name{font-weight:700;color:var(--white);font-size:15px;line-height:1.3}
-.author__role{font-size:13px;color:var(--muted);line-height:1.3}
+    <!-- Relative paths so the page also renders when opened straight from disk -->
+    <link rel="stylesheet" href="../src/css/main.css">
 
-/* ---------- list ---------- */
-main{padding-bottom:24px}
-.sect-head{border-top:1px solid var(--line);padding-top:36px;margin-bottom:30px}
-.sect-num{
-  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.2em;
-  color:var(--muted);text-transform:uppercase;display:block;margin-bottom:10px;
-}
-h2{
-  font-family:'Unbounded',sans-serif;font-weight:500;
-  font-size:clamp(25px,4.4vw,34px);line-height:1.15;letter-spacing:-.015em;
-  color:var(--pink);margin:0 0 10px;
-}
-.sect-sub{color:var(--muted);font-size:16px;margin:0;max-width:600px}
+    <link rel="icon" href="../assets/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../assets/me.png" type="image/png" sizes="32x32">
+    <link rel="apple-touch-icon" href="../assets/me.png">
 
-.guides{display:grid;gap:16px;margin-top:8px}
-.guide{
-  display:block;text-decoration:none;color:inherit;
-  background:linear-gradient(180deg,var(--surface-2),var(--surface));
-  border:1px solid var(--line);border-radius:20px;
-  padding:26px 26px 24px;
-  transition:border-color .25s, transform .25s, box-shadow .25s;
-}
-.guide:hover{
-  border-color:rgba(255,62,134,.42);
-  transform:translateY(-2px);
-  box-shadow:0 14px 40px rgba(255,62,134,.10);
-}
-.guide__tags{
-  font-family:'JetBrains Mono',monospace;font-size:11.5px;letter-spacing:.16em;
-  text-transform:uppercase;color:var(--lilac);margin:0 0 12px;
-}
-.guide__title{
-  font-family:'Unbounded',sans-serif;font-weight:500;
-  font-size:clamp(21px,3.6vw,27px);line-height:1.2;letter-spacing:-.015em;
-  color:var(--white);margin:0 0 10px;
-}
-.guide__desc{font-size:15.5px;color:var(--muted);margin:0 0 18px;max-width:560px}
-.guide__go{
-  display:inline-flex;align-items:center;gap:9px;
-  font-family:'Unbounded',sans-serif;font-weight:500;font-size:13.5px;
-  color:var(--pink);
-}
-.guide__go span{transition:transform .25s}
-.guide:hover .guide__go span{transform:translateX(4px)}
-
-.soon{
-  border:1px dashed var(--line);border-radius:20px;
-  padding:24px 26px;background:transparent;
-}
-.soon .guide__tags{color:var(--muted)}
-.soon__title{
-  font-family:'Unbounded',sans-serif;font-weight:500;font-size:19px;
-  color:var(--muted);margin:0;
-}
-
-/* ---------- footer ---------- */
-footer{
-  margin-top:56px;border-top:1px solid var(--line);
-  padding:44px 0 60px;text-align:center;
-}
-.sign{font-family:'Unbounded',sans-serif;font-weight:500;font-size:22px;color:var(--white);margin:0 0 8px}
-.sign a{color:var(--pink);text-decoration:none}
-.sign a:hover{text-decoration:underline}
-.foot-note{font-size:15px;color:var(--muted);margin:0}
-.foot-note a{color:var(--lilac);text-decoration:none}
-
-@media (max-width:600px){
-  body{font-size:16px}
-  .hero__inner{padding-top:60px}
-  .guide{padding:22px 20px}
-}
-@media (prefers-reduced-motion:reduce){
-  *{transition:none !important}
-  html{scroll-behavior:auto}
-}
-</style>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Безкоштовні AI-гайди",
+      "description": "Гайди з готовими промптами для генерації та редагування фото.",
+      "url": "https://diana-creator.site/guides/",
+      "author": {
+        "@type": "Person",
+        "name": "Diana Tsiolkovska",
+        "jobTitle": "UGC & AI Creator",
+        "url": "https://diana-creator.site/"
+      },
+      "hasPart": [
+        {
+          "@type": "Article",
+          "headline": "Зміни стелю однією командою",
+          "description": "16 готових промптів для редагування фото інтер'єру: змінюється тільки стеля.",
+          "url": "https://diana-creator.site/guides/ceiling/"
+        }
+      ]
+    }
+    </script>
 </head>
 <body>
 
-<header class="hero">
-  <div class="ceiling"><div class="ceiling__glow"></div><div class="ceiling__grid"></div></div>
-  <div class="wrap hero__inner">
-    <a class="backlink" href="/">← На головну</a>
-    <p class="eyebrow">Безкоштовні матеріали</p>
-    <h1>Гайди<br>по <span class="accent">AI</span></h1>
-    <p class="lede">Готові промпти й покрокові туторіали, які я сама використовую в роботі. <strong>Копіюєш — вставляєш — отримуєш результат.</strong></p>
-    <div class="author">
-      <img src="/assets/me.png" alt="Diana Tsiolkovska" width="52" height="52">
-      <div>
-        <div class="author__name">@diana.tsiolkovska</div>
-        <div class="author__role">UGC &amp; AI Creator</div>
-      </div>
+<div class="global-background">
+    <div class="gradient-orb orb-1"></div>
+    <div class="gradient-orb orb-2"></div>
+    <div class="gradient-orb orb-3"></div>
+    <div class="grid-overlay"></div>
+</div>
+
+<a href="https://ig.me/m/diana.tsiolkovska"
+   target="_blank"
+   rel="noopener noreferrer"
+   class="floating-cta"
+   aria-label="Написати в Instagram Direct">
+    <span>Написати</span>
+    <span aria-hidden="true">✈️</span>
+</a>
+
+<header class="guides-hero">
+    <div class="container">
+        <a href="../" class="crumb">
+            <span class="arrow-icon" aria-hidden="true">←</span> На головну
+        </a>
+        <p class="subtitle">Безкоштовно</p>
+        <h1>AI-ГАЙДИ</h1>
+        <p class="hero-desc">
+            Промпти, якими я користуюсь у роботі. <strong>Копіюєш — вставляєш — маєш результат.</strong>
+        </p>
     </div>
-  </div>
 </header>
 
-<main class="wrap">
+<main>
+    <section class="section guides-section">
+        <div class="container">
+            <div class="guides-grid">
 
-  <div class="sect-head">
-    <span class="sect-num">Обери гайд</span>
-    <h2>Що є зараз</h2>
-    <p class="sect-sub">Кожен гайд — окрема сторінка з промптами, які можна скопіювати в один клік.</p>
-  </div>
+                <a class="guide-card" href="ceiling/">
+                    <div class="guide-icon-bg" aria-hidden="true">
+                        <svg viewBox="0 0 24 24"><path d="M12,3L2,12H5V20H19V12H22L12,3M12,8.75A2.25,2.25 0 0,1 14.25,11A2.25,2.25 0 0,1 12,13.25A2.25,2.25 0 0,1 9.75,11A2.25,2.25 0 0,1 12,8.75Z" /></svg>
+                    </div>
+                    <div class="guide-tags">
+                        <span class="guide-tag">AI</span>
+                        <span class="guide-tag">Інтер'єр</span>
+                    </div>
+                    <h2 class="guide-title">Зміни стелю однією командою</h2>
+                    <p class="guide-desc">
+                        Готові промпти для фото інтер'єру: кімната лишається та ж, змінюється тільки стеля.
+                        Від кесонів і дерев'яних рейок — до космосу.
+                    </p>
+                    <div class="guide-meta">
+                        <span>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19,3H5C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V5C21,3.89 20.1,3 19,3M19,19H5V5H19V19M17,17H7V15H17V17M17,13H7V11H17V13M17,9H7V7H17V9Z" /></svg>
+                            16 промптів
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12,2A2,2 0 0,1 14,4C14,4.74 13.6,5.39 13,5.73V7H14A7,7 0 0,1 21,14H22A1,1 0 0,1 23,15V18A1,1 0 0,1 22,19H21V20A2,2 0 0,1 19,22H5A2,2 0 0,1 3,20V19H2A1,1 0 0,1 1,18V15A1,1 0 0,1 2,14H3A7,7 0 0,1 10,7H11V5.73C10.4,5.39 10,4.74 10,4A2,2 0 0,1 12,2M7.5,13A2.5,2.5 0 0,0 5,15.5A2.5,2.5 0 0,0 7.5,18A2.5,2.5 0 0,0 10,15.5A2.5,2.5 0 0,0 7.5,13M16.5,13A2.5,2.5 0 0,0 14,15.5A2.5,2.5 0 0,0 16.5,18A2.5,2.5 0 0,0 19,15.5A2.5,2.5 0 0,0 16.5,13Z" /></svg>
+                            Gemini · ChatGPT · Grok
+                        </span>
+                        <span>
+                            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19,21H8V7H19M19,5H8A2,2 0 0,0 6,7V21A2,2 0 0,0 8,23H19A2,2 0 0,0 21,21V7A2,2 0 0,0 19,5M16,1H4A2,2 0 0,0 2,3V17H4V3H16V1Z" /></svg>
+                            Копіювання в клік
+                        </span>
+                    </div>
+                    <span class="guide-btn">
+                        Відкрити гайд <span class="arrow-icon" aria-hidden="true">→</span>
+                    </span>
+                </a>
 
-  <div class="guides">
+                <div class="guide-card is-soon">
+                    <div class="guide-tags">
+                        <span class="guide-tag">Скоро</span>
+                    </div>
+                    <h2 class="guide-title">Наступний гайд у роботі</h2>
+                    <p class="guide-desc">
+                        Стеж за <a href="https://instagram.com/diana.tsiolkovska" target="_blank" rel="noopener noreferrer">Instagram</a> — там анонс.
+                    </p>
+                </div>
 
-    <a class="guide" href="/guides/ceiling/">
-      <p class="guide__tags">AI · Інтер'єр · 16 промптів</p>
-      <h3 class="guide__title">Зміни стелю однією командою</h3>
-      <p class="guide__desc">Готові промпти для редагування фото інтер'єру: кімната лишається точно такою ж, змінюється тільки стеля. Від кесонів і дерев'яних рейок — до пітона, космосу й твоєї власної іграшки.</p>
-      <div class="guide__go">Відкрити гайд <span>→</span></div>
-    </a>
-
-    <div class="soon">
-      <p class="guide__tags">Скоро</p>
-      <p class="soon__title">Наступний гайд уже в роботі</p>
-    </div>
-
-  </div>
-
+            </div>
+        </div>
+    </section>
 </main>
 
-<footer>
-  <div class="wrap">
-    <p class="sign">Діана Ціолковська</p>
-    <p class="foot-note">Твій UGC креатор з баченням майбутнього · Туторіали по AI · Зйомка · Монтаж<br><a href="https://diana-creator.site">diana-creator.site</a></p>
-  </div>
+<footer class="footer">
+    <div class="container">
+
+        <div class="footer-cta-card">
+            <h2 class="footer-title">Потрібен контент, а не промпти?</h2>
+            <p class="footer-desc">Зроблю UGC та AI-відео для вашого бренду за 48 годин.</p>
+
+            <div class="hero-actions footer-actions">
+                <a href="https://ig.me/m/diana.tsiolkovska"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="btn-cta"
+                   data-cta="guides_message">Написати мені</a>
+                <a href="../#portfolio" class="btn-primary">Дивитись роботи</a>
+            </div>
+        </div>
+
+        <p class="copyright">© 2026 Diana Tsiolkovska | Designed with AI</p>
+    </div>
 </footer>
+
+<script type="module">
+    import { initAnalytics } from '../src/js/analytics.js';
+    initAnalytics();
+</script>
 
 </body>
 </html>

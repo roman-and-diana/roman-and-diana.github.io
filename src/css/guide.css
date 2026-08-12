@@ -1,0 +1,23 @@
+/**
+ * Guide Page CSS Entry Point (/guides/<slug>/)
+ *
+ * A trimmed version of main.css: only what a single guide page needs.
+ * The homepage-only sections (portfolio, reviews, services, faq, marquee,
+ * features, footer card) are deliberately left out.
+ */
+
+/* Variables - Must be loaded first */
+@import url('variables.css');
+
+/* Base styles and resets */
+@import url('base.css');
+
+/* Shared chrome: aurora background, buttons, floating CTA */
+@import url('components/background.css');
+@import url('components/hero.css');
+
+/* Guides hub styles — reused here for .btn-guides / .crumb */
+@import url('components/guides.css');
+
+/* Guide page layout — loaded last so it wins over the shared rules */
+@import url('components/guide-page.css');

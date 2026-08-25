@@ -795,6 +795,214 @@ footer {
     box-shadow: 0 0 20px rgba(123, 44, 191, 0.25);
 }
 
+/* ---------- floating stage (hero animation) ---------- */
+.stage {
+    position: relative;
+    margin-top: 34px;
+    height: 190px;
+    border-bottom: 1px solid rgba(123, 44, 191, 0.45);
+}
+
+.stage::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--pink), transparent);
+}
+
+.stage__chip {
+    position: absolute;
+    bottom: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 8px 13px;
+    background: rgba(3, 0, 10, 0.85);
+    white-space: nowrap;
+    animation: stage-launch 5.4s cubic-bezier(0.12, 0.9, 0.24, 1) infinite;
+}
+
+@keyframes stage-launch {
+    0% {
+        transform: translateY(0) rotate(0);
+        opacity: 0.25;
+    }
+    4% {
+        transform: translateY(var(--h)) rotate(var(--r));
+        opacity: 1;
+    }
+    46% {
+        transform: translateY(calc(var(--h) + 7px)) rotate(calc(var(--r) * -1));
+        opacity: 1;
+    }
+    88% {
+        transform: translateY(var(--h)) rotate(var(--r));
+        opacity: 1;
+    }
+    96%,
+    100% {
+        transform: translateY(0) rotate(0);
+        opacity: 0.25;
+    }
+}
+
+.stage__chip:nth-of-type(1) { left: 0%;  --h: -152px; --r: -4deg; animation-delay: 0s; }
+.stage__chip:nth-of-type(2) { left: 15%; --h: -96px;  --r: 3deg;  animation-delay: 0.02s; }
+.stage__chip:nth-of-type(3) { left: 29%; --h: -166px; --r: 5deg;  animation-delay: 0.01s; }
+.stage__chip:nth-of-type(4) { left: 43%; --h: -58px;  --r: -2deg; animation-delay: 0.03s; }
+.stage__chip:nth-of-type(5) { left: 56%; --h: -138px; --r: 6deg;  animation-delay: 0s; }
+.stage__chip:nth-of-type(6) { left: 70%; --h: -88px;  --r: -5deg; animation-delay: 0.02s; }
+.stage__chip:nth-of-type(7) { left: 84%; --h: -160px; --r: 2deg;  animation-delay: 0.01s; }
+
+.stage__note {
+    position: absolute;
+    right: 0;
+    bottom: -30px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.38);
+}
+
+/* ---------- fill-in fields (prompt placeholders) ---------- */
+.fill {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 26px;
+}
+
+.field {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-medium);
+    padding: 22px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.field label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--lilac);
+    margin-bottom: 10px;
+}
+
+.field .hint {
+    display: block;
+    font-size: 14px;
+    color: var(--muted);
+    margin: 0 0 14px;
+}
+
+.field .hint b {
+    color: var(--body);
+    font-weight: 600;
+}
+
+.field input,
+.field textarea {
+    width: 100%;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--white);
+    background: var(--code-bg);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 13px 15px;
+    resize: vertical;
+}
+
+.field textarea {
+    min-height: 170px;
+}
+
+.field input:focus,
+.field textarea:focus {
+    outline: 2px solid var(--pink);
+    outline-offset: 1px;
+    border-color: transparent;
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+    color: rgba(255, 255, 255, 0.3);
+}
+
+/* Long generated prompt: scrollable, with highlighted placeholders */
+.code--prompt {
+    max-height: 460px;
+    font-size: 12.8px;
+}
+
+.code--prompt .h {
+    color: var(--pink);
+    font-weight: 700;
+}
+
+.code--prompt .tok {
+    color: var(--ink);
+    background: #00fff9;
+    border-radius: 4px;
+    padding: 0 5px;
+    font-weight: 700;
+}
+
+.code--prompt .filled {
+    color: var(--white);
+    font-weight: 600;
+}
+
+/* ---------- note card (caveat with inline code) ---------- */
+.note-card {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 22px;
+    margin-top: 26px;
+}
+
+.note-card h3 {
+    font-size: 17px;
+    color: var(--lilac);
+}
+
+.note-card p {
+    font-size: 15.5px;
+    color: var(--muted);
+    margin: 10px 0 0;
+}
+
+.note-card code {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--pink);
+    background: rgba(255, 0, 193, 0.1);
+    padding: 2px 7px;
+    border-radius: 6px;
+}
+
+/* ---------- tablet ---------- */
+@media (max-width: 780px) {
+    .fill {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ---------- mobile ---------- */
 @media (max-width: 600px) {
     body {
@@ -822,9 +1030,30 @@ footer {
 
     .card,
     .step,
-    .tip {
+    .tip,
+    .field,
+    .note-card {
         backdrop-filter: blur(8px);
         -webkit-backdrop-filter: blur(8px);
+    }
+
+    .field,
+    .note-card {
+        padding: 18px;
+    }
+
+    .stage {
+        height: 150px;
+    }
+
+    .stage__chip {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+
+    .stage__chip:nth-of-type(3),
+    .stage__chip:nth-of-type(6) {
+        display: none;
     }
 
     .profile {
@@ -852,5 +1081,11 @@ footer {
 @media (prefers-reduced-motion: reduce) {
     html {
         scroll-behavior: auto;
+    }
+
+    .stage__chip {
+        animation: none;
+        transform: translateY(var(--h));
+        opacity: 1;
     }
 }

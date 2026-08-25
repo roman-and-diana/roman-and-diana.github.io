@@ -319,13 +319,12 @@ function plain(){
 function render(){
   const v = values();
   const cls = f => f ? 'filled' : 'tok';
-  let html = esc(TEMPLATE)
-    .split('{{S}}').join(' S ')
-    .split('{{O}}').join(' O ');
-
-  html = html
-    .split(' S ').join('<span class="' + cls(v.sFilled) + '">' + esc(v.s) + '</span>')
-    .split(' O ').join('<span class="' + cls(v.oFilled) + '">' + esc(v.o) + '</span>');
+  // one pass, so text typed into a field can never be re-scanned as a placeholder
+  let html = esc(TEMPLATE).replace(/\{\{([SO])\}\}/g, function(_, key){
+    const filled = key === 'S' ? v.sFilled : v.oFilled;
+    const value  = key === 'S' ? v.s : v.o;
+    return '<span class="' + cls(filled) + '">' + esc(value) + '</span>';
+  });
 
   // highlight the block headings
   html = html.replace(/^([A-Z][A-Z0-9 ,()\-\/%]{6,}:)$/gm, '<span class="h">$1</span>');

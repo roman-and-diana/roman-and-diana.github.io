@@ -582,6 +582,104 @@ h3 {
     font-weight: 600;
 }
 
+/* ---------- highlighted card (the "start here" prompt) ---------- */
+.card--feature {
+    background: linear-gradient(150deg, rgba(123, 44, 191, 0.18), rgba(255, 0, 193, 0.07));
+    border-color: rgba(255, 0, 193, 0.34);
+}
+
+/* ---------- warning callout ---------- */
+.warn {
+    margin-top: 22px;
+    padding: 20px 22px;
+    border: 1px solid rgba(255, 0, 193, 0.32);
+    border-radius: 16px;
+    background: rgba(255, 0, 193, 0.08);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-size: 15.5px;
+    color: var(--muted);
+}
+
+.warn b {
+    color: var(--pink);
+    font-weight: 700;
+}
+
+/* ---------- placeholder token inside a prompt ---------- */
+.ph {
+    color: var(--gold);
+    font-weight: 500;
+}
+
+/* Long prompt inside a card: scrolls instead of stretching the page */
+.design--long {
+    max-height: 340px;
+    overflow-y: auto;
+}
+
+.design--long::-webkit-scrollbar {
+    width: 8px;
+}
+
+.design--long::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.14);
+    border-radius: 8px;
+}
+
+/* ---------- placeholder legend (what to write in the brackets) ---------- */
+.legend {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+}
+
+.legend h4 {
+    font-family: var(--font-header);
+    font-weight: 500;
+    font-size: 15px;
+    color: var(--white);
+    margin: 0 0 14px;
+}
+
+.legend dl {
+    display: grid;
+    gap: 11px;
+    margin: 0;
+}
+
+.legend .row {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.legend dt {
+    flex: none;
+    min-width: 190px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--gold);
+    padding-top: 1px;
+}
+
+.legend dd {
+    flex: 1 1 240px;
+    margin: 0;
+    font-size: 14.5px;
+    color: var(--muted);
+}
+
+/* English examples read as code, not as emphasis */
+.legend dd i,
+.step p i {
+    font-style: normal;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.92em;
+    color: var(--lilac);
+}
+
 /* ---------- tips ---------- */
 .tips {
     display: grid;

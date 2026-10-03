@@ -941,6 +941,194 @@ h3 {
     color: var(--lilac);
 }
 
+.step p a {
+    color: var(--lilac);
+    text-decoration: underline;
+    text-decoration-color: rgba(215, 184, 255, 0.4);
+    text-underline-offset: 3px;
+}
+
+.step p a:hover {
+    color: var(--white);
+}
+
+/* ---------- reference tokens (@Video1 / @Image1 / @Image2) ----------
+   One colour per uploaded file, used the same in steps, legend and prompt */
+.tok {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.92em;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.tok--v {
+    color: #7ee3f2;
+}
+
+.tok--i1 {
+    color: #f08ad8;
+}
+
+.tok--i2 {
+    color: var(--lilac);
+}
+
+.tok-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+    margin: 0 0 16px;
+    padding: 0;
+}
+
+.tok-legend li {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 8px;
+    padding: 7px 14px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-round);
+    background: var(--surface-2);
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* ---------- video gallery (watch + download) ---------- */
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+}
+
+.vcard {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 10px 14px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-medium);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: border-color var(--transition-normal) ease, box-shadow var(--transition-normal) ease;
+}
+
+.vcard:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 20px rgba(123, 44, 191, 0.2);
+}
+
+.media {
+    position: relative;
+    aspect-ratio: 9 / 16;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #000;
+}
+
+.media video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Once playing, show the whole frame (some clips are landscape or square) */
+.media.on video {
+    object-fit: contain;
+}
+
+.play {
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    display: grid;
+    place-items: center;
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    background: rgba(10, 4, 16, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    cursor: pointer;
+    transition: transform var(--transition-fast) ease, background var(--transition-normal) ease;
+}
+
+.play:hover {
+    transform: scale(1.06);
+    background: rgba(123, 44, 191, 0.55);
+}
+
+.play:focus-visible {
+    outline: 2px solid var(--lilac);
+    outline-offset: 3px;
+}
+
+.play svg {
+    width: 26px;
+    height: 26px;
+    margin-left: 3px;
+    fill: #fff;
+}
+
+.dur {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    padding: 3px 9px;
+    border-radius: var(--radius-round);
+    background: rgba(10, 4, 16, 0.6);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: #fff;
+}
+
+.media.on .play,
+.media.on .dur {
+    display: none;
+}
+
+.vcard .card__top {
+    padding: 14px 6px;
+    margin: 0;
+}
+
+.vcard h3 {
+    font-size: 14.5px;
+}
+
+/* Download reuses the gradient .copy pill */
+.vcard__dl {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: auto 4px 0;
+    padding: 11px 14px;
+    font-size: 12px;
+    text-decoration: none;
+}
+
+.vcard__dl svg {
+    flex: none;
+    width: 17px;
+    height: 17px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.vcard__size {
+    font-family: var(--font-body);
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0.75;
+}
+
 /* ---------- tips ---------- */
 .tips {
     display: grid;
@@ -1396,6 +1584,35 @@ footer {
     .kit__icon {
         flex: none;
         margin-bottom: 0;
+    }
+
+    .gallery {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px;
+    }
+
+    .vcard {
+        padding: 8px 8px 12px;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+
+    .vcard .card__top {
+        gap: 8px;
+        padding: 12px 4px;
+    }
+
+    .vcard h3 {
+        font-size: 13px;
+    }
+
+    .vcard__dl {
+        padding: 10px;
+        font-size: 11px;
+    }
+
+    .vcard__size {
+        display: none;
     }
 
     .author {

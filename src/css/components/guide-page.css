@@ -1129,6 +1129,17 @@ h3 {
     opacity: 0.75;
 }
 
+/* While the video is being fetched for the share sheet */
+.vcard__dl.is-busy {
+    opacity: 0.7;
+    cursor: progress;
+}
+
+/* Shown only inside Instagram / TikTok / Facebook in-app browsers */
+.inapp-note {
+    margin: 0 0 18px;
+}
+
 /* ---------- tips ---------- */
 .tips {
     display: grid;

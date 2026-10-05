@@ -1554,10 +1554,56 @@ footer {
     border-radius: 6px;
 }
 
+/* ---------- photo card: 9:16 example beside the prompts ---------- */
+.card--shot {
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 26px;
+    align-items: start;
+}
+
+.card__shot {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 9 / 16;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: var(--code-bg);
+}
+
+.card__body {
+    min-width: 0;
+}
+
+/* Slash command shown under the card title (/DRONEVIEW) */
+.cmd {
+    display: inline-block;
+    margin: 6px 0 12px;
+    padding: 3px 10px;
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--pink);
+    background: rgba(255, 0, 193, 0.1);
+}
+
+/* Second prompt for another model: cyan accent instead of pink */
+.design--gpt {
+    border-left-color: #7ee3f2;
+}
+
 /* ---------- tablet ---------- */
 @media (max-width: 780px) {
     .fill {
         grid-template-columns: 1fr;
+    }
+
+    .card--shot {
+        grid-template-columns: 180px minmax(0, 1fr);
+        gap: 20px;
     }
 }
 
@@ -1583,6 +1629,15 @@ footer {
 
     .kit {
         grid-template-columns: 1fr;
+    }
+
+    .card--shot {
+        grid-template-columns: minmax(0, 1fr);
+    }
+
+    .card__shot {
+        width: min(100%, 300px);
+        margin: 0 auto;
     }
 
     .kit__item {

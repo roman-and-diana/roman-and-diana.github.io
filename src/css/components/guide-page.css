@@ -1595,6 +1595,209 @@ footer {
     border-left-color: #7ee3f2;
 }
 
+/* Example photo with a caption pill over its bottom corner */
+.card__figure {
+    position: relative;
+    margin: 0;
+}
+
+.card__shot-tag {
+    position: absolute;
+    left: 10px;
+    bottom: 10px;
+    padding: 5px 11px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-round);
+    background: rgba(3, 0, 10, 0.6);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+}
+
+.tips--after {
+    margin-top: 14px;
+}
+
+/* Highlighted time codes / block labels inside a long prompt */
+.design .tc {
+    color: var(--pink);
+    font-weight: 600;
+}
+
+.design .tc2 {
+    color: var(--lilac);
+    font-weight: 600;
+}
+
+/* ---------- segmented switch (Вона / Він) ---------- */
+.seg-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 0 0 20px;
+    font-size: 14.5px;
+    color: var(--muted);
+}
+
+.seg {
+    display: inline-flex;
+    padding: 3px;
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: var(--radius-round);
+    background: var(--surface-2);
+}
+
+.seg button {
+    padding: 8px 18px;
+    border: 0;
+    border-radius: var(--radius-round);
+    background: none;
+    font-family: var(--font-header);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    cursor: pointer;
+    transition: color var(--transition-fast) ease;
+}
+
+.seg button:hover {
+    color: var(--white);
+}
+
+.seg button.is-on {
+    background-image: linear-gradient(90deg, #7b2cbf, #ff00c1);
+    color: #fff;
+}
+
+.seg button:focus-visible {
+    outline: 2px solid var(--lilac);
+    outline-offset: 2px;
+}
+
+/* ---------- timeline: what happens second by second ---------- */
+.timeline {
+    margin: 0 0 14px;
+    padding: 24px 26px;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-medium);
+    background: var(--surface);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+}
+
+.timeline .t1 { --c: #7b2cbf; }
+.timeline .t2 { --c: #ff00c1; }
+.timeline .t3 { --c: #7ee3f2; }
+.timeline .t4 { --c: #a777ff; }
+.timeline .t5 { --c: #c22f9d; }
+
+.timeline__bar {
+    display: flex;
+    gap: 3px;
+    height: 14px;
+}
+
+.timeline__bar i {
+    border-radius: 4px;
+    background: var(--c);
+}
+
+.timeline__bar i:first-child {
+    border-radius: 999px 4px 4px 999px;
+}
+
+.timeline__bar i:last-child {
+    border-radius: 4px 999px 999px 4px;
+}
+
+/* Slow-motion stretch is striped so it reads as "different speed" */
+.timeline__bar .t2 {
+    background: repeating-linear-gradient(45deg, #ff00c1 0 7px, #ff6fda 7px 14px);
+}
+
+.timeline__ticks {
+    position: relative;
+    height: 20px;
+    margin: 8px 0 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.timeline__ticks span {
+    position: absolute;
+    transform: translateX(-50%);
+}
+
+.timeline__ticks span:first-child {
+    transform: none;
+}
+
+.timeline__ticks span:last-child {
+    transform: translateX(-100%);
+}
+
+.timeline__list {
+    display: grid;
+    gap: 12px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.timeline__list li {
+    display: grid;
+    grid-template-columns: 96px 1fr;
+    gap: 12px;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+.timeline__list b {
+    color: var(--white);
+    font-weight: 600;
+}
+
+.timeline__tm {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 23px;
+    white-space: nowrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12.5px;
+    color: var(--white);
+}
+
+.timeline__tm::before {
+    content: '';
+    flex: none;
+    width: 9px;
+    height: 9px;
+    border-radius: 3px;
+    background: var(--c);
+}
+
+.timeline__slow {
+    margin-right: 6px;
+    padding: 1px 7px;
+    border: 1px solid rgba(255, 0, 193, 0.4);
+    border-radius: var(--radius-round);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.14em;
+    color: var(--pink);
+    vertical-align: 1px;
+}
+
 /* ---------- tablet ---------- */
 @media (max-width: 780px) {
     .fill {
@@ -1635,9 +1838,23 @@ footer {
         grid-template-columns: minmax(0, 1fr);
     }
 
-    .card__shot {
+    .card__shot,
+    .card__figure {
         width: min(100%, 300px);
         margin: 0 auto;
+    }
+
+    .card__figure .card__shot {
+        width: 100%;
+    }
+
+    .timeline {
+        padding: 20px 18px;
+    }
+
+    .timeline__list li {
+        grid-template-columns: 1fr;
+        gap: 2px;
     }
 
     .kit__item {

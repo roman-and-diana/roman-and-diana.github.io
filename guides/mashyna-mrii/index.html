@@ -86,7 +86,6 @@
     <p class="lede">
       Переробила свою сіру машину через AI: рожевий кузов, біла шкіра, туш у перемикачі дворників
       і гардероб у багажнику. <strong>Тут усі промпти, які в мене спрацювали.</strong>
-      Спершу робиш фото-референси в Nano Banana, потім оживляєш їх у відео.
     </p>
     <ul class="chips">
       <li>22 промпти · EN</li>
@@ -122,7 +121,7 @@
     <div class="sect-head">
       <span class="sect-num">Крок за кроком</span>
       <h2>Як це працює</h2>
-      <p class="sect-sub">Машину модель бере з фото, а тебе — з відео. Тому спершу робимо фото-референси без тебе, а потім міняємо машину у відео.</p>
+      <p class="sect-sub">AI бере машину з фото, а тебе з відео. Тому спершу фото, потім відео.</p>
     </div>
 
     <div class="steps">
@@ -130,23 +129,22 @@
         <span class="step__n">01</span>
         <div>
           <span class="step__t">Знімаєш свою машину</span>
-          <p>Що саме зняти, написано біля кожного кроку. Тебе в кадрі може бути скільки завгодно.</p>
+          <p>Що знімати, написано в кожному кроці. Ти можеш бути в кадрі.</p>
         </div>
       </div>
       <div class="step">
         <span class="step__n">02</span>
         <div>
           <span class="step__t">Робиш фото-референс у Nano Banana</span>
-          <p>Береш скрін зі свого відео, і промпт прибирає з нього тебе та змінює машину.</p>
+          <p>Робиш скрін з відео. Промпт прибирає тебе з кадру і міняє машину.</p>
         </div>
       </div>
       <div class="step">
         <span class="step__n">03</span>
         <div>
           <span class="step__t">Оживляєш у відео</span>
-          <p>Ти в кадрі → <b>Higgsfield Genjutsu</b>, режим <i>Objects swap</i>: змінює машину, а тебе лишає як є.
-             Тебе в кадрі немає → <b>Gemini Omni Flash 1.1</b>, <i>Create Video</i>: <i>References</i> редагує твоє відео,
-             <i>Frames</i> оживлює рух між першим і останнім кадром. Він найдешевший для тестів.</p>
+          <p>Ти в кадрі: <b>Higgsfield Genjutsu</b>, <i>Objects swap</i>. Тебе немає: <b>Gemini Omni Flash 1.1</b>, він дешевший.
+             Режим вказаний біля кожного промпту.</p>
         </div>
       </div>
       <div class="step">
@@ -162,15 +160,14 @@
   <section>
     <div class="sect-head">
       <span class="sect-num">Перед стартом</span>
-      <h2>5 правил</h2>
+      <h2>4 правила</h2>
     </div>
 
     <div class="tips">
-      <div class="tip"><b>На фото-референсах тебе немає</b>Тоді модель для відео бере з них тільки машину і не перемальовує твоє обличчя.</div>
+      <div class="tip"><b>На фото-референсах тебе немає</b>Інакше AI змінить тобі обличчя у відео.</div>
       <div class="tip"><b>Текст у <span class="ph">[дужках]</span> міняй на своє</b>Колір, диски, косметику, одяг. Якщо нічого не міняти, вийде рожева машина, як у мене. Дужки можна не видаляти.</div>
       <div class="tip"><b>@Image 1 і @Video 1 встав заново</b>Після вставки промпту видали <i>@Image 1</i> чи <i>@Video 1</i>, набери <i>@</i> і обери потрібний файл зі списку.</div>
       <div class="tip"><b>Спершу тест на 360p, фінал на 1080p</b>Так не спалиш кредити на невдалу спробу.</div>
-      <div class="tip"><b>Біля кожного кроку є сума</b>Скільки такий тюнінг коштував би насправді — можна показати у відео.</div>
     </div>
   </section>
 
@@ -178,7 +175,7 @@
     <div class="sect-head">
       <span class="sect-num">Промпти / EN</span>
       <h2>Шість кроків тюнінгу</h2>
-      <p class="sect-sub">У кожному кроці спершу <b>фото</b> в Nano Banana, потім <b>відео</b> з цими фото. Наступні кроки беруть фото з попередніх, тому йди по порядку.</p>
+      <p class="sect-sub">Йди по порядку: наступні кроки беруть фото з попередніх.</p>
     </div>
 
     <nav class="jump" aria-label="Кроки">
@@ -196,7 +193,7 @@
       <article class="card" id="exterior">
         <div class="card__top"><span class="card__n">01</span><h3>Колір і диски</h3></div>
         <div class="card__tags"><span class="guide-tag">+104 000 грн</span><span class="card__sum">разом 104 000 грн</span></div>
-        <p class="card__desc"><b>Зніми:</b> себе біля машини, щоб її було видно з різних боків. Окремо — колесо крупним планом.</p>
+        <p class="card__desc"><b>Зніми:</b> себе біля машини, щоб її було видно з різних боків. Окремо зніми колесо крупним планом.</p>
 
         <div class="prompt">
           <div class="prompt__label"><span class="prompt__step">1</span><span class="prompt__text">Фото: головний референс машини</span><span class="prompt__tool">Nano Banana</span></div>
@@ -206,7 +203,6 @@
 <pre class="design design--long">Remove the person completely and naturally restore the car and the background behind them. Repaint the car body in a [glossy pearl pink wrap with a soft iridescent shimmer]. Replace the wheels with [glossy white rims with rose gold accents] and new black tires. Keep everything else exactly the same: the car's shape and badges, black lower trims, roof rails, chrome window trim, tinted windows, lights, sky, background, camera angle and lighting. Photorealistic, looks like the same photo.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати промпт</button>
-            <span class="hint">можна замінити: колір кузова, диски</span>
           </div>
         </div>
 
@@ -231,7 +227,6 @@
 <pre class="design design--long">Use Image 1 as the base photo. Replace the rim with the exact rim design from Image 2: [glossy white rim with rose gold spokes], the same spoke shape and number, the same center cap. Keep the black tire, its size and sidewall. Make any visible car paint the same color as in Image 2; the black plastic wheel arch trim stays black. Keep the camera angle, framing, lighting, ground and background of Image 1 exactly the same. Sharp, photorealistic, natural reflections on the rim.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати промпт</button>
-            <span class="hint">можна замінити: диски</span>
           </div>
         </div>
 
@@ -245,7 +240,6 @@
 <pre class="design design--long">Replace the [dark grey] car with the car from @image1, @image2 and @image3: [glossy pearl pink wrap, white rims with rose gold spokes]. If the video has several shots, the car must look identical in all of them. Keep the woman exactly as in the video: her face, hair, outfit, shoes, gestures, lip movement and walk. Keep her natural reflection on the glossy paint and her shadow exactly as in the video. Keep the background, lighting, camera movement, timing and the cuts between the shots unchanged.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати відео</button>
-            <span class="hint">можна замінити: колір твоєї машини зараз, новий вигляд</span>
           </div>
         </div>
 
@@ -289,7 +283,6 @@ FORBIDDEN: changing the camera move, rim size or tire shape; warping, melting or
 Photorealistic, natural light, real textures.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати промпт</button>
-            <span class="hint">можна замінити: оббивку, косметику, сидіння, полик</span>
           </div>
         </div>
 
@@ -343,7 +336,7 @@ FORBIDDEN: cosmetics appearing, moving or morphing during the shot; any change t
         </div>
 
         <div class="prompt">
-          <div class="prompt__label"><span class="prompt__step">1</span><span class="prompt__text">Фото: останній кадр — туш у руці</span><span class="prompt__tool">Nano Banana</span></div>
+          <div class="prompt__label"><span class="prompt__step">1</span><span class="prompt__text">Фото: останній кадр, туш у руці</span><span class="prompt__tool">Nano Banana</span></div>
           <ol class="refs">
             <li><code>1</code><span><b>Скрін</b>, де туш уже в руці біля перемикача</span></li>
           </ol>
@@ -357,12 +350,11 @@ FORBIDDEN: cosmetics appearing, moving or morphing during the shot; any change t
 Look: soft, clean, slightly brighter and airy, gentle warm light with soft highlights, no harsh glare, no noise. The colors stay clean, not brownish. Photorealistic, like a photo from a luxury car interior catalog.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати промпт</button>
-            <span class="hint">можна замінити: колір тюбика, полик, кермо</span>
           </div>
         </div>
 
         <div class="prompt">
-          <div class="prompt__label"><span class="prompt__step">2</span><span class="prompt__text">Фото: перший кадр — кришечка в перемикачі</span><span class="prompt__tool">Nano Banana</span></div>
+          <div class="prompt__label"><span class="prompt__step">2</span><span class="prompt__text">Фото: перший кадр, кришечка в перемикачі</span><span class="prompt__tool">Nano Banana</span></div>
           <ol class="refs">
             <li><code>1</code><span><b>Скрін</b>, де пальці тримають кінчик перемикача</span></li>
             <li><code>2</code><span><b>Останній кадр</b> з кроку 1</span></li>
@@ -375,7 +367,6 @@ Look: soft, clean, slightly brighter and airy, gentle warm light with soft highl
 Keep her hand, sleeve, legs, shoes, camera angle and light exactly as in Image 1. Photorealistic, clean aesthetic look.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати промпт</button>
-            <span class="hint">можна замінити: колір кришечки</span>
           </div>
         </div>
 
@@ -403,7 +394,7 @@ FORBIDDEN: the wand coming from beside, above or below the stalk; the wand passi
           <div class="card__foot">
             <button class="copy" type="button">Копіювати відео</button>
           </div>
-          <div class="tip"><b>Перед відео звір два кадри</b>Кермо, полик, ноги й фон мають бути однакові. Відрізняються тільки рука й туш — інакше в кадрі щось з'явиться або зникне.</div>
+          <div class="tip"><b>Перед відео звір два кадри</b>Різними можуть бути тільки рука й туш. Все інше, що відрізняється, у відео з'явиться або зникне.</div>
         </div>
       </article>
 
@@ -419,7 +410,7 @@ FORBIDDEN: the wand coming from beside, above or below the stalk; the wand passi
         </div>
 
         <div class="prompt">
-          <div class="prompt__label"><span class="prompt__step">1</span><span class="prompt__text">Фото: перший кадр — помада в перемикачі</span><span class="prompt__tool">Nano Banana</span></div>
+          <div class="prompt__label"><span class="prompt__step">1</span><span class="prompt__text">Фото: перший кадр, помада в перемикачі</span><span class="prompt__tool">Nano Banana</span></div>
           <ol class="refs">
             <li><code>1</code><span><b>Скрін</b>, де пальці тримають кінчик перемикача</span></li>
             <li><code>2</code><span><b>Останній кадр туші</b> з кроку 03</span></li>
@@ -432,12 +423,11 @@ FORBIDDEN: the wand coming from beside, above or below the stalk; the wand passi
 Keep her hand, rings, manicure, sleeve, legs, shoes, camera angle and light exactly as in Image 1. Photorealistic, clean aesthetic look.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати промпт</button>
-            <span class="hint">можна замінити: колір ковпачка</span>
           </div>
         </div>
 
         <div class="prompt">
-          <div class="prompt__label"><span class="prompt__step">2</span><span class="prompt__text">Фото: останній кадр — помада в камеру</span><span class="prompt__tool">Nano Banana</span></div>
+          <div class="prompt__label"><span class="prompt__step">2</span><span class="prompt__text">Фото: останній кадр, помада в камеру</span><span class="prompt__tool">Nano Banana</span></div>
           <ol class="refs">
             <li><code>1</code><span><b>Скрін</b>, де ти показуєш помаду</span></li>
             <li><code>2</code><span><b>Перший кадр</b> з кроку 1</span></li>
@@ -478,7 +468,7 @@ FORBIDDEN: skipping the pull; the lipstick appearing in her hand without visibly
           <div class="card__foot">
             <button class="copy" type="button">Копіювати відео</button>
           </div>
-          <div class="tip"><b>Помада «телепортується» в руку?</b>Зроби два кліпи. Перший закінчується кадром, де помада щойно вийшла й ще біля перемикача, другий починається з нього і показує помаду в камеру. У CapCut склейка буде непомітна.</div>
+          <div class="tip"><b>Помада «телепортується» в руку?</b>Зроби два кліпи: перший до моменту, коли помада вийшла, другий від цього кадру до камери. Склей у CapCut.</div>
         </div>
       </article>
 
@@ -511,7 +501,6 @@ FORBIDDEN: skipping the pull; the lipstick appearing in her hand without visibly
 The dashboard and center console stay black and spotless. Keep the camera angle, framing, background and light exactly as in Image 1. Photorealistic, clean aesthetic look.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати промпт</button>
-            <span class="hint">можна замінити: сидіння, двері</span>
           </div>
         </div>
 
@@ -582,7 +571,7 @@ FORBIDDEN: zoom instead of camera movement; fast or shaky motion; seats or steer
       <article class="card" id="trunk">
         <div class="card__top"><span class="card__n">06</span><h3>Гардероб у багажнику</h3></div>
         <div class="card__tags"><span class="guide-tag">+32 000 грн</span><span class="card__sum">разом 227 500 грн</span></div>
-        <p class="card__desc"><b>Зніми:</b> себе біля відчиненого багажника — загальний план і ближче.</p>
+        <p class="card__desc"><b>Зніми:</b> себе біля відчиненого багажника: загальний план і ближче.</p>
 
         <div class="pair">
           <figure><img src="images/trunk-before.jpg" alt="Звичайний багажник з органайзером, Діана поруч" width="480" height="852" loading="lazy" decoding="async"><figcaption>До</figcaption></figure>
@@ -607,7 +596,6 @@ FORBIDDEN: zoom instead of camera movement; fast or shaky motion; seats or steer
 Keep the camera angle, framing, sky, background and light exactly as in Image 1. Photorealistic, clean, stylish boutique look.</pre>
           <div class="card__foot">
             <button class="copy" type="button">Копіювати промпт</button>
-            <span class="hint">можна замінити: штангу, одяг, кольори, полицю, взуття, полик</span>
           </div>
         </div>
 
@@ -717,7 +705,7 @@ Keep the woman exactly as in the video: her face, eyes, expression, hair, makeup
 
 <script>
 (function(){
-  // [Brackets] mark what to swap for your own — highlight them, copy stays raw text
+  // [Brackets] mark what to swap for your own: highlight them, copy stays raw text
   function esc(s){ return s.replace(/[&<>]/g, function(c){ return { '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]; }); }
   document.querySelectorAll('.prompt pre').forEach(function(pre){
     var raw = pre.textContent.trim();

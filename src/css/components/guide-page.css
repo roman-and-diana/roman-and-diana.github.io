@@ -2010,9 +2010,87 @@ footer {
     color: var(--muted);
 }
 
+/* ---------- checklist inside a tip (what works / what doesn't) ---------- */
+.tips--split {
+    grid-template-columns: 1fr 1fr;
+}
+
+.tip ul {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    margin: 8px 0 0;
+    padding: 0;
+}
+
+.tip li {
+    position: relative;
+    padding-left: 20px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.tip li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--pink);
+}
+
+.tip--bad li::before {
+    background: transparent;
+    border: 1.5px solid var(--muted);
+}
+
+/* "must upload" marker inside the reference order */
+.refs .must {
+    margin-left: 8px;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--pink);
+    white-space: nowrap;
+}
+
+/* Reference token for an uploaded photo (@image1 … @image5) */
+.tok--ref {
+    color: #7ee3f2;
+}
+
+/* A question answered with a segmented switch */
+.field .seg {
+    flex-wrap: wrap;
+}
+
+/* State line above a generated prompt */
+.seg-row b {
+    color: var(--white);
+    font-weight: 700;
+}
+
+.seg-row a {
+    color: var(--lilac);
+    text-decoration: underline;
+    text-decoration-color: rgba(215, 184, 255, 0.4);
+    text-underline-offset: 3px;
+}
+
+.seg-row a:hover {
+    color: var(--white);
+}
+
 /* ---------- tablet ---------- */
 @media (max-width: 780px) {
     .fill {
+        grid-template-columns: 1fr;
+    }
+
+    .tips--split {
         grid-template-columns: 1fr;
     }
 

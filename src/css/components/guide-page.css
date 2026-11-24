@@ -1573,6 +1573,19 @@ footer {
     background: var(--code-bg);
 }
 
+/* App screenshots keep their own proportions instead of the 9:16 photo frame, and get a wider column */
+.card__shot--ui {
+    aspect-ratio: auto;
+    object-fit: contain;
+    background: #fff;
+}
+
+@media (min-width: 781px) {
+    .card--shot:has(.card__shot--ui) {
+        grid-template-columns: 280px minmax(0, 1fr);
+    }
+}
+
 .card__body {
     min-width: 0;
 }
